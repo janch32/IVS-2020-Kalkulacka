@@ -1,0 +1,32 @@
+Stanovené termíny
+=================
+TODO
+
+
+Přidělení úkolů
+===============
+TODO přidělení úkolů na projektu jednotlivým řešitelům
+
+Jan Chaloupka (xchalo16)
+  - TODO
+
+Michal Halabica (xhalab00)
+  - TODO
+
+Marek Václavík (xvacla26)
+  - TODO
+
+
+Komunikační kanály
+==================
+Discord?
+TODO zvolené komunikační kanály pro komunikaci v týmu a stanovená pravidla pro komunikaci (jsou-li nějaká)
+
+
+Správa verzí
+============
+
+Systém pro správu verzí: git
+Hosting: GitHub (github.com)
+Název repozitáře: IVS-2020-Kalkulacka
+Adresa: https://github.com/janch32/IVS-2020-Kalkulacka

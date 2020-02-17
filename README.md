@@ -1,2 +1,2 @@
-# IVS-2020-Kalkulacka
+# IVS Kalkulačka
 Týmový projekt předmětu IVS. Kalkulačka pro Windows
