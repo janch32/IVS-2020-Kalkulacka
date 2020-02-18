@@ -4,16 +4,24 @@ Plán projektu a rozdělení úkolů
 Skupina: TODO Název skupiny
 
 
-Stanovené termíny
------------------
+Stanovené termíny (MM/DD)
+-------------------------
 
-TODO
+02/18 - Založení týmu
+03/18 - Odevzdání plánu projektu
+04/22 - Odevzdání výsledného produktu
+04/30 - Instalace produktu u zákazníka
+05/08 - Zhodnocení týmové spolupráce
+05/14 - Veřejná obhajoba projektu
+TODO: Naše vlastní termíny
 
 
 Přidělení úkolů
 ---------------
 
 Jan Chaloupka (xchalo16)
+  - Založení repozitáře
+  - Plán projektu a rozdělení úkolů
   - TODO
 
 Michal Halabica (xhalab00)
@@ -29,9 +37,9 @@ Richard Hrmo (xhrmor00)
 Komunikační kanály
 ------------------
 
-Discord?
-TODO zvolené komunikační kanály pro komunikaci v týmu a stanovená pravidla pro
-komunikaci (jsou-li nějaká)
+Privátní Discord server
+
+TODO: stanovená pravidla pro komunikaci (jsou-li nějaká)
 
 
 Správa verzí
