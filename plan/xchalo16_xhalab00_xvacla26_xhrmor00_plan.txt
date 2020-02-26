@@ -8,18 +8,21 @@ Stanovené termíny (MM/DD)
 -------------------------
 
 02/18 - Založení týmu
+02/26 - 1. Schůze týmu
+
 03/18 - Odevzdání plánu projektu
+03/22 - Testy matematické knihovny
+03/29 - Mockup UI
+
+04/05 - Matematická knihovna
+04/12 - Implementace UI + profiling
+04/19 - Dokončení projektu (dokumentace, makefile)
 04/22 - Odevzdání výsledného produktu
 04/30 - Instalace produktu u zákazníka
+
 05/08 - Zhodnocení týmové spolupráce
 05/14 - Veřejná obhajoba projektu
 
-02/26 - 1. Schůze týmu.
-03/22 - Testy matematické knihovny.
-03/29 - Mockup UI.
-04/05 - Matematická knihovna.
-04/12 - Implementace UI + profiling.
-04/19 - Dokončení projektu (profiling, dokumentace, makefile).
 
 
 Přidělení úkolů
@@ -52,9 +55,8 @@ Richard Hrmo (xhrmor00)
 Komunikační kanály
 ------------------
 
-Privátní Discord server
-
-TODO: stanovená pravidla pro komunikaci (jsou-li nějaká)
+Privátní Discord server. Skupinová komunikace ve společném komunikačním
+kanále + další kanál pro stavové zprávy repozitáře.
 
 
 Správa verzí
