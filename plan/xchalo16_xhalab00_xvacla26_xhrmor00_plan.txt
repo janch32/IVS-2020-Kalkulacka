@@ -13,7 +13,13 @@ Stanovené termíny (MM/DD)
 04/30 - Instalace produktu u zákazníka
 05/08 - Zhodnocení týmové spolupráce
 05/14 - Veřejná obhajoba projektu
-TODO: Naše vlastní termíny
+
+02/26 - 1. Schůze týmu.
+03/22 - Testy matematické knihovny.
+03/29 - Mockup UI.
+04/05 - Matematická knihovna.
+04/12 - Implementace UI + profiling.
+04/19 - Dokončení projektu (profiling, dokumentace, makefile).
 
 
 Přidělení úkolů
@@ -22,16 +28,25 @@ Přidělení úkolů
 Jan Chaloupka (xchalo16)
   - Založení repozitáře
   - Plán projektu a rozdělení úkolů
-  - TODO
+  - Implementace matematické knihovny
+  - Mockup
 
 Michal Halabica (xhalab00)
-  - TODO
+  - Implementace TDD testů
+  - Profiling
+  - Dokumentace
+  - Kontrola Clean Code
 
 Marek Václavík (xvacla26)
-  - TODO
+  - Mockup
+  - Implementace UI
+  - Dokumentace
 
 Richard Hrmo (xhrmor00)
-  - TODO
+  - Mockup
+  - Makefile
+  - Instalátor
+  - Readme
 
 
 Komunikační kanály
