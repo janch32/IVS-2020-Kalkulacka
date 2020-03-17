@@ -1,7 +1,7 @@
 
 Plán projektu a rozdělení úkolů
 ===============================
-Skupina: TODO Název skupiny
+Skupina: IVS and chill
 
 
 Stanovené termíny (MM/DD)
@@ -11,7 +11,8 @@ Stanovené termíny (MM/DD)
 02/26 - 1. Schůze týmu
 
 03/18 - Odevzdání plánu projektu
-03/22 - Testy matematické knihovny
+03/22 - Návrh matematické knihovny
+03/29 - Testy matematické knihovny
 03/29 - Mockup UI
 
 04/05 - Matematická knihovna
@@ -31,11 +32,13 @@ Přidělení úkolů
 Jan Chaloupka (xchalo16)
   - Založení repozitáře
   - Plán projektu a rozdělení úkolů
+  - Návrh matematické knihovny
   - Implementace matematické knihovny
   - Mockup
 
 Michal Halabica (xhalab00)
-  - Implementace TDD testů
+  - Návrh matematické knihovny
+  - Implementace TDD testů matematické knihovny
   - Profiling
   - Dokumentace
   - Kontrola Clean Code
