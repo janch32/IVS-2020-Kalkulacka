@@ -189,7 +189,8 @@ namespace MathLib.Tests
                 new Tuple<string, double>("17 % 3", 2.0),
                 new Tuple<string, double>("4/2", 2.0),
                 new Tuple<string, double>("4!", 24.0),
-                new Tuple<string, double>("4! + 42*3", 150.0)
+                new Tuple<string, double>("4! + 42*3", 150.0),
+                new Tuple<string, double>("(1+1)*4+42", 50.0)
             };
 
             foreach (var testCase in testCases)
