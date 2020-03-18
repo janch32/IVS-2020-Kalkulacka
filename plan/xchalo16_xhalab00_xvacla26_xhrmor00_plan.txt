@@ -15,8 +15,7 @@ Stanovené termíny (MM/DD)
 03/29 - Testy matematické knihovny
 03/29 - Mockup UI
 
-04/01 - Předpokládaná schůze týmů (skupinová konverzace na Discordu)
-
+04/01 - Projednání návrhů UI (skupinová konverzace na Discordu)
 04/05 - Matematická knihovna
 04/12 - Implementace UI + profiling
 04/19 - Dokončení projektu (dokumentace, makefile)
