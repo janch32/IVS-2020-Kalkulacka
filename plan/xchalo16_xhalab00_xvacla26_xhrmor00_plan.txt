@@ -11,13 +11,16 @@ Stanovené termíny (MM/DD)
 02/26 - 1. Schůze týmu
 
 03/18 - Odevzdání plánu projektu
+03/22 - Makefile a založení Visual Studio projektů
 03/22 - Návrh matematické knihovny
 03/29 - Testy matematické knihovny
 03/29 - Mockup UI
 
 04/05 - Matematická knihovna
 04/12 - Implementace UI + profiling
-04/19 - Dokončení projektu (dokumentace, makefile)
+04/19 - Finalizace projektu
+04/20 - Instalátor
+04/21 - Dokumentace projektu
 04/22 - Odevzdání výsledného produktu
 04/30 - Instalace produktu u zákazníka
 
