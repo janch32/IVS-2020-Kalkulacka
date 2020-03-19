@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using MathLib.Exceptions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
 namespace MathLib.Tests
@@ -209,7 +210,8 @@ namespace MathLib.Tests
                 new Tuple<string, double>("9 - 7  -  6   - 5  -   4   -3-2-1", -27.0),
                 new Tuple<string, double>("4^8", 65536.0),
                 new Tuple<string, double>("5    root    42", 1.039063628),
-                new Tuple<string, double>("5 % 2", 1.0)
+                new Tuple<string, double>("5 % 2", 1.0),
+                new Tuple<string, double>("(5+1)!", 720.0)
             };
 
             foreach (var testCase in testCases)
@@ -217,6 +219,77 @@ namespace MathLib.Tests
                 double result = Library.EvaluateExpression(testCase.Item1);
                 Assert.AreEqual(testCase.Item2, result, 0.1);
             }
+        }
+
+        [TestMethod]
+        public void EvaluateExpression_PI_Test()
+        {
+            double result = Library.EvaluateExpression("PI");
+            Assert.AreEqual(Library.PI, result);
+        }
+
+        [TestMethod]
+        public void EvaluateExpression_E_Test()
+        {
+            double result = Library.EvaluateExpression("E");
+            Assert.AreEqual(Library.E, result);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExpressionParseException))]
+        public void UnknownOperator_Test()
+        {
+            Library.EvaluateExpression("42|53");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExpressionParseException))]
+        public void InvalidCountOfParenthes_Test()
+        {
+            Library.EvaluateExpression("(35+42)+5)+2)");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArithmeticException))]
+        public void DivisionByZeroConstant_Test()
+        {
+            Library.EvaluateExpression("6/0");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArithmeticException))]
+        public void DivisionByZeroDuringExpressionProcessing_Test()
+        {
+            Library.EvaluateExpression("6/(3-3)");
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArithmeticException))]
+        public void UndefinedRootConstant_Test()
+        {
+            Library.EvaluateExpression("-15.0 root 2");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArithmeticException))]
+        public void UndefinedRootDuringExpressiongProcessing_Test()
+        {
+            Library.EvaluateExpression("(-5 * 3) root 2");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArithmeticException))]
+        public void NegativeFactorialConstant_Test()
+        {
+            Library.EvaluateExpression("-5!");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArithmeticException))]
+        public void NegativeFactorialDuringExpressionProcessing_Test()
+        {
+            Library.EvaluateExpression("(6-8)!");
         }
     }
 }
