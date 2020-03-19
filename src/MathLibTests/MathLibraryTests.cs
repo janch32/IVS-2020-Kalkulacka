@@ -184,7 +184,7 @@ namespace MathLib.Tests
                 new Tuple<string, double>("42 - 36", 6.0),
                 new Tuple<string, double>("48.6 * 32", 1555.2),
                 new Tuple<string, double>("4^2", 16.0),
-                new Tuple<string, double>("16 yroot 2", 4.0),
+                new Tuple<string, double>("16 root 2", 4.0),
                 new Tuple<string, double>("16 % 2", 0.0),
                 new Tuple<string, double>("17 % 3", 2.0),
                 new Tuple<string, double>("4/2", 2.0),
@@ -195,7 +195,7 @@ namespace MathLib.Tests
 
             foreach (var testCase in testCases)
             {
-                double result = Library.CalculateException(testCase.Item1);
+                double result = Library.EvaluateExpression(testCase.Item1);
                 Assert.AreEqual(testCase.Item2, result, 0.1);
             }
         }
