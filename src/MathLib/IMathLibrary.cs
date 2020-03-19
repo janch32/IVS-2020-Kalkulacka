@@ -1,4 +1,5 @@
 ﻿using System;
+using MathLib.Exceptions;
 
 namespace MathLib
 {
@@ -87,6 +88,7 @@ namespace MathLib
         /// <param name="expression">Mathematical expression eg. "2 / (1 + 2) * 5"</param>
         /// <exception cref="DivideByZeroException">Throws when division by zero happens when evaluating expression</exception>
         /// <exception cref="ArithmeticException">Throws when invalid argument occurs in math function</exception>
+        /// <exception cref="ExpressionParseException">Throws when the provided string is an invalid expression</exception>
         /// <returns>Mathematical expression result</returns>
         double EvaluateExpression(string expression);
     }
