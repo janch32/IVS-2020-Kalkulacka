@@ -174,7 +174,7 @@ namespace MathLib.Tests
         }
 
         [TestMethod]
-        public void CalculateExpression_Tests()
+        public void EvaluateExpression_Tests()
         {
             var testCases = new[]
             {
@@ -190,7 +190,26 @@ namespace MathLib.Tests
                 new Tuple<string, double>("4/2", 2.0),
                 new Tuple<string, double>("4!", 24.0),
                 new Tuple<string, double>("4! + 42*3", 150.0),
-                new Tuple<string, double>("(1+1)*4+42", 50.0)
+                new Tuple<string, double>("(1+1)*4+42", 50.0),
+                new Tuple<string, double>("(((((1)+1)+1)+1)+1)*3", 12.0),
+                new Tuple<string, double>("(1+1) * (3/2) + 4", 7.0),
+                new Tuple<string, double>("400 * 500 + (42 / 3) * 3! * (15 root 3)", 200207.1618),
+                new Tuple<string, double>("(25 % 3) * 42", 42.0),
+                new Tuple<string, double>("10", 10.0),
+                new Tuple<string, double>("300.5 * 400.3", 120290.15),
+                new Tuple<string, double>("10.5 * 0", 0.0),
+                new Tuple<string, double>("((((5 + ((6 / 4.0) ^ 3)) / 1) / 10) * (8 + ((3 ^ 6) / 4))) * 2", 318.66875),
+                new Tuple<string, double>("3*(4^5)-2/5*(3-7)", 3073.6),
+                new Tuple<string, double>("              3348.36562                        *                   12 ^ 6", 9998166167.0),
+                new Tuple<string, double>("0", 0.0),
+                new Tuple<string, double>("5!*5!", 14400.0),
+                new Tuple<string, double>("((((   1!   )  *  2!)   *   3!)    *    4!)", 288.0),
+                new Tuple<string, double>("1/1/1/1/1/1/1/1", 1.0),
+                new Tuple<string, double>("9/8/7/6", 0.02678571429),
+                new Tuple<string, double>("9 - 7  -  6   - 5  -   4   -3-2-1", -27.0),
+                new Tuple<string, double>("4^8", 65536.0),
+                new Tuple<string, double>("5    root    42", 1.039063628),
+                new Tuple<string, double>("5 % 2", 1.0)
             };
 
             foreach (var testCase in testCases)
