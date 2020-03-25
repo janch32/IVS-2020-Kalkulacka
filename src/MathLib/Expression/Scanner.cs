@@ -16,7 +16,7 @@ namespace MathLib.Expression
         private readonly Regex Factorial = new Regex(@"^\s*!");
         private readonly Regex LeftBracket = new Regex(@"^\s*\(");
         private readonly Regex RightBracket = new Regex(@"^\s*\)");
-        private readonly Regex Number = new Regex(@"^\s*([1-9]\d*|0)((\.|,)\d+)?");
+        private readonly Regex Number = new Regex(@"^\s*-?([1-9]\d*|0)((\.|,)\d+)?");
         private readonly Regex Pi = new Regex(@"^\s*(pi|π)", RegexOptions.IgnoreCase);
         private readonly Regex Euler = new Regex(@"^\s*(e|euler)", RegexOptions.IgnoreCase);
 
@@ -64,7 +64,7 @@ namespace MathLib.Expression
                 return new Token(TokenType.Euler, match.Value.Trim());
 
             throw new ExpressionParseException(
-                $"Could not match any token at the beginning of \"{expr}\"");
+                $"Unknown token \"{expr}\"");
         }
 
         public Token[] GetTokens(string expr)
@@ -88,7 +88,7 @@ namespace MathLib.Expression
             catch (ExpressionParseException e)
             {
                 throw new ExpressionParseException(
-                    $"Syntax Error: {e.Message} on position {pos}");
+                    $"Syntax Error: {e.Message} on pos {pos}");
             }
 
             return tokens.ToArray();

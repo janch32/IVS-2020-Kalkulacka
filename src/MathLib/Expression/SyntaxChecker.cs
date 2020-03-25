@@ -20,7 +20,8 @@ namespace MathLib.Expression
                     return prev == TokenType.Number ||
                         prev == TokenType.Pi ||
                         prev == TokenType.Euler ||
-                        prev == TokenType.RightBracket;
+                        prev == TokenType.RightBracket ||
+                        prev == TokenType.Factorial;
                 case TokenType.LeftBracket:
                 case TokenType.Number:
                 case TokenType.Pi:
@@ -52,13 +53,13 @@ namespace MathLib.Expression
                 if (prev == null)
                 {
                     throw new ExpressionParseException(
-                        $"Syntax Error: expression cannot start with type " +
+                        $"Syntax Error: Expression cannot start with type " +
                         $"{curr.Type}(\"{curr.Value}\")");
                 }
                 
                 throw new ExpressionParseException(
-                    $"Syntax Error: incompatible type {prev.Type}(\"{prev.Value}\") with" +
-                    $" {curr.Type}(\"{curr.Value}\") on position {curr.Position}");
+                    $"Syntax Error: Incompatible type {prev.Type}(\"{prev.Value}\") with" +
+                    $" {curr.Type}(\"{curr.Value}\") on pos {curr.Position}");
             }
         }
     }

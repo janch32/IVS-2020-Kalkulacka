@@ -68,13 +68,13 @@ namespace MathLib
             return a % b;
         }
 
+        private Scanner ExprScanner = new Scanner();
+        private SyntaxChecker ExprSyntaxChecker = new SyntaxChecker();
+        
         public double EvaluateExpression(string expression)
         {
-            var scanner = new Scanner();
-            var syntaxChecker = new SyntaxChecker();
-
-            var tokens = scanner.GetTokens(expression);
-            syntaxChecker.VerifySyntax(tokens);
+            var tokens = ExprScanner.GetTokens(expression);
+            ExprSyntaxChecker.VerifySyntax(tokens);
 
             throw new NotImplementedException();
         }
