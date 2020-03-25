@@ -31,19 +31,25 @@ namespace MathLib
             return a / b;
         }
 
-        public long Factorial(int x)
+        public double Factorial(double x)
         {
-            if(x < 0)
-                throw new ArithmeticException("Factorial of negative number is undefined");
+            if(x < 0) throw new ArithmeticException(
+                "Factorial can only be calculated from positive number");
 
-            long res = x > 1 ? x : 1;
+            if (x % 1 == 0) throw new ArithmeticException(
+                "Factorial can only be calculated from decimal number");
+
+            var res = x > 1 ? x : 1.0;
             while (x-- > 2) res *= x;
             return res;
         }
 
-        public double Power(double a, int n)
+        public double Power(double a, double n)
         {
-            if(n < 0)
+            if (n % 1 == 0) throw new ArithmeticException(
+                "Power exponent must be decimal number");
+
+            if (n < 0)
             {
                 n = -n;
                 a = 1 / a;
@@ -54,17 +60,24 @@ namespace MathLib
             return res;
         }
 
-        public double Root(double a, int n)
+        public double Root(double a, double n)
         {
-            if (a < 0)
-                throw new ArithmeticException("Root can only by calculated from positive number");
+            if (a < 0) throw new ArithmeticException(
+                "Root can only by calculated from positive number");
 
-            // TODO předělat aby to nepoužívalo Math knihovnu
+            if (n % 1 == 0) throw new ArithmeticException(
+                "Root must be decimal number");
+
             return Math.Pow(a, 1.0 / n); 
         }
 
-        public double Modulo(double a, int b)
+        public double Modulo(double a, double b)
         {
+            if (b == 0) throw new DivideByZeroException();
+
+            if (b < 0) throw new ArithmeticException(
+                "Modulo divisor must be decimal number");
+            
             return a % b;
         }
 

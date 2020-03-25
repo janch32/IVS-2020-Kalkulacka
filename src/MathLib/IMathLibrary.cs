@@ -51,36 +51,38 @@ namespace MathLib
         /// <summary>
         /// Calculate factorial
         /// </summary>
-        /// <param name="n">Number greater then or equal to zero</param>
+        /// <param name="n">Decimal number greater then or equal to zero</param>
         /// <exception cref="ArithmeticException">Throws when the provided number is negative</exception>
         /// <returns>Factorial result</returns>
-        long Factorial(int n);
+        double Factorial(double n);
 
         /// <summary>
         /// Calculate exponentiation of base <c>a</c> to the power of <c>n</c>
         /// </summary>
         /// <param name="a">Base</param>
-        /// <param name="n">Exponent</param>
+        /// <param name="n">Exponent (decimal number)</param>
+        /// <exception cref="ArithmeticException">Throws when exponent is not decimal number</exception>
         /// <returns>Exponentiation result</returns>
-        double Power(double a, int n);
+        double Power(double a, double n);
 
         /// <summary>
         /// Calculate <c>n</c>th root of a number <c>a</c>, also known as root extraction
         /// </summary>
         /// <param name="a">Base</param>
-        /// <param name="n">Root</param>
+        /// <param name="n">Root (decimal number)</param>
         /// <exception cref="ArithmeticException">Throws when the base is negative</exception>
         /// <returns>Root exraction result</returns>
-        double Root(double a, int n);
+        double Root(double a, double n);
 
         /// <summary>
         /// Calculate remainder of two integer division
         /// </summary>
         /// <param name="a">Dividend (left side)</param>
-        /// <param name="b">Divisor (right side). Must not be zero!</param>
+        /// <param name="b">Divisor (right side, decimal number). Must not be zero!</param>
         /// <exception cref="DivideByZeroException">Throws when the value of the divisor is zero</exception>
+        /// <exception cref="ArithmeticException">Throws when divisor is not decimal number</exception>
         /// <returns>Integer division remainder</returns>
-        double Modulo(double a, int b);
+        double Modulo(double a, double b);
 
         /// <summary>
         /// Parse and evaluate provided mathematical expression
@@ -88,7 +90,7 @@ namespace MathLib
         /// <param name="expression">Mathematical expression eg. "2 / (1 + 2) * 5"</param>
         /// <exception cref="DivideByZeroException">Throws when division by zero happens when evaluating expression</exception>
         /// <exception cref="ArithmeticException">Throws when invalid argument occurs in math function</exception>
-        /// <exception cref="ExpressionParseException">Throws when the provided string is an invalid expression</exception>
+        /// <exception cref="ParseException">Throws when the provided string is an invalid expression</exception>
         /// <returns>Mathematical expression result</returns>
         double EvaluateExpression(string expression);
     }

@@ -85,19 +85,19 @@ namespace MathLib.Tests
         public void Factorial_Test()
         {
             var testCases = new[] {
-                new Tuple<int, long>(0, 1),
-                new Tuple<int, long>(1, 1),
-                new Tuple<int, long>(2, 2),
-                new Tuple<int, long>(3, 6),
-                new Tuple<int, long>(4, 24),
-                new Tuple<int, long>(5, 120),
-                new Tuple<int, long>(7, 5040),
-                new Tuple<int, long>(15, 1307674368000)
+                new Tuple<int, double>(0, 1),
+                new Tuple<int, double>(1, 1),
+                new Tuple<int, double>(2, 2),
+                new Tuple<int, double>(3, 6),
+                new Tuple<int, double>(4, 24),
+                new Tuple<int, double>(5, 120),
+                new Tuple<int, double>(7, 5040),
+                new Tuple<int, double>(15, 1307674368000)
             };
 
             foreach (var testCase in testCases)
             {
-                long result = Library.Factorial(testCase.Item1);
+                double result = Library.Factorial(testCase.Item1);
                 Assert.AreEqual(testCase.Item2, result);
             }
         }
@@ -236,14 +236,14 @@ namespace MathLib.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExpressionParseException))]
+        [ExpectedException(typeof(ParseException))]
         public void UnknownOperator_Test()
         {
             Library.EvaluateExpression("42|53");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExpressionParseException))]
+        [ExpectedException(typeof(ParseException))]
         public void InvalidCountOfParenthes_Test()
         {
             Library.EvaluateExpression("(35+42)+5)+2)");
