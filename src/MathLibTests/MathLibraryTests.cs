@@ -179,12 +179,13 @@ namespace MathLib.Tests
         {
             var testCases = new[]
             {
-                new Tuple<string, decimal>("2/5*4", 1.6M),
+                new Tuple<string, decimal>("3,2", 3.2M),
                 new Tuple<string, decimal>("1+1", 2.0M),
                 new Tuple<string, decimal>("1 + 1", 2.0M),
                 new Tuple<string, decimal>("1 - 1", 0.0M),
                 new Tuple<string, decimal>("42 - 36", 6.0M),
                 new Tuple<string, decimal>("48.6 * 32", 1555.2M),
+                new Tuple<string, decimal>("2/5*4", 1.6M),
                 new Tuple<string, decimal>("4^2", 16.0M),
                 new Tuple<string, decimal>("16 root 2", 4.0M),
                 new Tuple<string, decimal>("16 % 2", 0.0M),
@@ -202,7 +203,7 @@ namespace MathLib.Tests
                 new Tuple<string, decimal>("10.5 * 0", 0.0M),
                 new Tuple<string, decimal>("((((5 + ((6 / 4.0) ^ 3)) / 1) / 10) * (8 + ((3 ^ 6) / 4))) * 2", 318.66875M),
                 new Tuple<string, decimal>("3*(4^5)-2/5*(3-7)", 3073.6M),
-                new Tuple<string, decimal>("              3348.36562                        *                   12 ^ 6", 9998166167.0M),
+                new Tuple<string, decimal>("              12^2^3  /  12^6root 6 - 12^(2,5*2)   ", 0.0M),
                 new Tuple<string, decimal>("0", 0.0M),
                 new Tuple<string, decimal>("5!*5!", 14400.0M),
                 new Tuple<string, decimal>("((((   1!   )  *  2!)   *   3!)    *    4!)", 288.0M),
@@ -218,7 +219,7 @@ namespace MathLib.Tests
             foreach (var testCase in testCases)
             {
                 decimal result = Library.EvaluateExpression(testCase.Item1);
-                Assert.AreEqual((double)testCase.Item2, (double)result, 0.1);
+                Assert.AreEqual((double)testCase.Item2, (double)result, 0.0001);
             }
         }
 

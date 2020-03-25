@@ -6,19 +6,19 @@ namespace MathLib.Expression
 {
     class Scanner
     {
-        private readonly Regex Add = new Regex(@"^\s*\+");
-        private readonly Regex Subtract = new Regex(@"^\s*-");
-        private readonly Regex Multiply = new Regex(@"^\s*\*");
-        private readonly Regex Divide = new Regex(@"^\s*\/");
-        private readonly Regex Power = new Regex(@"^\s*(pow|\^)", RegexOptions.IgnoreCase);
-        private readonly Regex Root = new Regex(@"^\s*root", RegexOptions.IgnoreCase);
-        private readonly Regex Modulo = new Regex(@"^\s*(mod|%)", RegexOptions.IgnoreCase);
-        private readonly Regex Factorial = new Regex(@"^\s*!");
-        private readonly Regex LeftBracket = new Regex(@"^\s*\(");
-        private readonly Regex RightBracket = new Regex(@"^\s*\)");
-        private readonly Regex Number = new Regex(@"^\s*([1-9]\d*|0)((\.|,)\d+)?");
-        private readonly Regex Pi = new Regex(@"^\s*(pi|π)", RegexOptions.IgnoreCase);
-        private readonly Regex Euler = new Regex(@"^\s*(e|euler)", RegexOptions.IgnoreCase);
+        private readonly Regex Add = new Regex(@"^\+");
+        private readonly Regex Subtract = new Regex(@"^-");
+        private readonly Regex Multiply = new Regex(@"^\*");
+        private readonly Regex Divide = new Regex(@"^\/");
+        private readonly Regex Power = new Regex(@"^(pow|\^)", RegexOptions.IgnoreCase);
+        private readonly Regex Root = new Regex(@"^root", RegexOptions.IgnoreCase);
+        private readonly Regex Modulo = new Regex(@"^(mod|%)", RegexOptions.IgnoreCase);
+        private readonly Regex Factorial = new Regex(@"^!");
+        private readonly Regex LeftBracket = new Regex(@"^\(");
+        private readonly Regex RightBracket = new Regex(@"^\)");
+        private readonly Regex Number = new Regex(@"^([1-9]\d*|0)((\.|,)\d+)?");
+        private readonly Regex Pi = new Regex(@"^(pi|π)", RegexOptions.IgnoreCase);
+        private readonly Regex Euler = new Regex(@"^(e|euler)", RegexOptions.IgnoreCase);
 
         private Token GetToken(string expr)
         {
@@ -101,19 +101,23 @@ namespace MathLib.Expression
 
         public Token[] GetTokens(string expr)
         {
-            expr = expr.Trim();
+            expr = expr.TrimEnd();
 
             var tokens = new List<Token>();
-            int pos = 0;
+            int pos = expr.Length;
             try
             {
                 while (!string.IsNullOrEmpty(expr))
                 {
+                    pos += expr.Length;
+                    expr = expr.TrimStart();
+                    pos -= expr.Length;
+
                     var token = GetToken(expr);
-                    var len = expr.IndexOf(token.Value) + token.Value.Length;
+
+                    expr = expr.Substring(token.Value.Length);
                     token.Position = pos;
-                    pos += len;
-                    expr = expr.Substring(len);
+                    pos += token.Value.Length;
 
                     tokens.Add(token);
                     OptimizeNumber(tokens);

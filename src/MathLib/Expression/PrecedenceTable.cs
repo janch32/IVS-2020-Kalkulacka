@@ -35,6 +35,9 @@
                 case TokenType.None:
                 case TokenType.Add:
                 case TokenType.Subtract:
+                case TokenType.Multiply:
+                case TokenType.Divide:
+                case TokenType.Modulo:
                 case TokenType.RightBracket:
                     return Precedence.Left;
             }
