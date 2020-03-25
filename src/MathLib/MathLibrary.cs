@@ -68,6 +68,12 @@ namespace MathLib
             if (n % 1 != 0) throw new ArithmeticException(
                 "Root must be decimal number");
 
+            if (n < 0)
+            {
+                n = -n;
+                a = 1 / a;
+            }
+
             return Math.Pow(a, 1.0 / n); 
         }
 

@@ -192,7 +192,7 @@ namespace MathLib.Tests
                 new Tuple<string, double>("4!", 24.0),
                 new Tuple<string, double>("4! + 42*3", 150.0),
                 new Tuple<string, double>("(1+1)*4+42", 50.0),
-                new Tuple<string, double>("(((((1)+1)+1)+1)+1)*3", 12.0),
+                new Tuple<string, double>("(((((1)+1)+1)+1)+1)*3", 15.0),
                 new Tuple<string, double>("(1+1) * (3/2) + 4", 7.0),
                 new Tuple<string, double>("400 * 500 + (42 / 3) * 3! * (15 root 3)", 200207.1618),
                 new Tuple<string, double>("(25 % 3) * 42", 42.0),
@@ -250,14 +250,14 @@ namespace MathLib.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArithmeticException))]
+        [ExpectedException(typeof(DivideByZeroException))]
         public void DivisionByZeroConstant_Test()
         {
             Library.EvaluateExpression("6/0");
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArithmeticException))]
+        [ExpectedException(typeof(DivideByZeroException))]
         public void DivisionByZeroDuringExpressionProcessing_Test()
         {
             Library.EvaluateExpression("6/(3-3)");

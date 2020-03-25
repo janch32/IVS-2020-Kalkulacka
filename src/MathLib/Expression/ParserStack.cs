@@ -1,7 +1,6 @@
 ﻿using MathLib.Exceptions;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Globalization;
 
 namespace MathLib.Expression
 {
@@ -121,7 +120,7 @@ namespace MathLib.Expression
                 switch (op.Type)
                 {
                     case TokenType.Number:
-                        return double.Parse(op.Value);
+                        return double.Parse(op.Value, CultureInfo.InvariantCulture);
                     case TokenType.Pi:
                         if (op.Value.Contains("-")) return -Math.PI;
                         return Math.PI;

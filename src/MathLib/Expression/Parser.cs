@@ -1,7 +1,5 @@
 ﻿using MathLib.Exceptions;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MathLib.Expression
 {

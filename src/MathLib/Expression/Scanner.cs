@@ -55,7 +55,7 @@ namespace MathLib.Expression
                 return new Token(TokenType.RightBracket, match.Value.Trim());
 
             if ((match = Number.Match(expr)).Success)
-                return new Token(TokenType.Number, match.Value.Trim());
+                return new Token(TokenType.Number, match.Value.Trim().Replace(',', '.'));
 
             if ((match = Pi.Match(expr)).Success)
                 return new Token(TokenType.Pi, match.Value.Trim());
