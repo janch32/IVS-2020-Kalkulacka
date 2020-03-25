@@ -71,7 +71,10 @@ namespace MathLib
         public double EvaluateExpression(string expression)
         {
             var scanner = new Scanner();
+            var syntaxChecker = new SyntaxChecker();
+
             var tokens = scanner.GetTokens(expression);
+            syntaxChecker.VerifySyntax(tokens);
 
             throw new NotImplementedException();
         }

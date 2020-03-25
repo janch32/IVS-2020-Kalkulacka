@@ -2,6 +2,7 @@
 {
     enum TokenType
     {
+        None,
         Add,
         Subtract,
         Multiply,
