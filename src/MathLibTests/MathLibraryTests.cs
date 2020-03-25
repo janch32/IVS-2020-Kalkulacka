@@ -164,7 +164,7 @@ namespace MathLib.Tests
                 new Tuple<double, int, double>(3.5, 2, 1.5),
                 new Tuple<double, int, double>(4.8, 3, 1.8),
                 new Tuple<double, int, double>(3.6, 42, 3.6),
-                new Tuple<double, int, double>(18625536.15, 156166, 41782.156)
+                new Tuple<double, int, double>(18625536.15, 156166, 41782.15)
             };
 
             foreach (var testCase in testCases)
