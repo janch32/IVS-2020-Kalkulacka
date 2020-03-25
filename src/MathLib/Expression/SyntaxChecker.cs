@@ -52,12 +52,12 @@ namespace MathLib.Expression
                 
                 if (prev == null)
                 {
-                    throw new ExpressionParseException(
+                    throw new ParseException(
                         $"Syntax Error: Expression cannot start with type " +
                         $"{curr.Type}(\"{curr.Value}\")");
                 }
                 
-                throw new ExpressionParseException(
+                throw new ParseException(
                     $"Syntax Error: Incompatible type {prev.Type}(\"{prev.Value}\") with" +
                     $" {curr.Type}(\"{curr.Value}\") on pos {curr.Position}");
             }

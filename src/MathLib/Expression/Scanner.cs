@@ -63,7 +63,7 @@ namespace MathLib.Expression
             if ((match = Euler.Match(expr)).Success)
                 return new Token(TokenType.Euler, match.Value.Trim());
 
-            throw new ExpressionParseException(
+            throw new ParseException(
                 $"Unknown token \"{expr}\"");
         }
 
@@ -85,9 +85,9 @@ namespace MathLib.Expression
                     tokens.Add(token);
                 }
             }
-            catch (ExpressionParseException e)
+            catch (ParseException e)
             {
-                throw new ExpressionParseException(
+                throw new ParseException(
                     $"Syntax Error: {e.Message} on pos {pos}");
             }
 

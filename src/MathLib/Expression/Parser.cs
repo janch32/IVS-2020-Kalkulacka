@@ -7,35 +7,25 @@ namespace MathLib.Expression
 {
     class Parser
     {
-        private Precedence GetTermPrecedence(TermType curr, TermType prev)
-        {
-            switch (prev)
-            {
-                case TermType.AddSub:
-                    return (curr & (TermType.AddSub | TermType.RightBracket | TermType.End)) > 0
-                        ? Precedence.Left : Precedence.Right;
-                case TermType.MulDivMod:
-                    return (curr & (TermType.Factorial | TermType.PowRoot | TermType.LeftBracket | TermType.Value)) > 0
-                        ? Precedence.Right : Precedence.Left;
-                case TermType.Factorial:
-                    return (curr & (TermType.LeftBracket | TermType.Value)) > 0
-                        ? Precedence.None : Precedence.Left;
-                case TermType.PowRoot:
-                    return (curr & (TermType.Factorial | TermType.LeftBracket | TermType.Value)) > 0
-                        ? Precedence.Right : Precedence.Left;
-                case TermType.LeftBracket:
-                    if(curr == TermType.RightBracket) return Precedence.Equals;
-                    if(curr == TermType.End) return Precedence.None;
-                    return Precedence.Right;
-                case TermType.Value:
-                    return (curr & (TermType.LeftBracket | TermType.Value)) > 0
-                        ? Precedence.None : Precedence.Left;
-                case TermType.End:
-                    return (curr & (TermType.RightBracket | TermType.End)) > 0
-                    ? Precedence.None : Precedence.Right;
-            }
+        private List<Token> InputTokens;
+        private PrecedenceTable PrecedenceTable = new PrecedenceTable();
 
-            return Precedence.None;
+        // Jo, dal jsem tam object, zažaluj mě
+        //
+        // Ale kdyby byla jiná cesta jak do listu narvat Token, NonTerm a Enum,
+        // tak bych to rád zkrášlil. Zatím jsem ale na nic jiného nepřišel.
+        private List<object> EvaluateStack = new List<object>();
+
+        public Parser(Token[] tokens)
+        {
+            InputTokens = new List<Token>(tokens);
+            InputTokens.Add(new Token(TokenType.None, "", -1));
+            EvaluateStack.Add(new Token(TokenType.None, "", 0));
+        }
+
+        private void Parse(Token input)
+        {
+            
         }
     }
 }
