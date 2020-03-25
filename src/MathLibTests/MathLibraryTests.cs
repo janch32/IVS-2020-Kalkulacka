@@ -18,13 +18,13 @@ namespace MathLib.Tests
         [TestMethod]
         public void PI_Test()
         {
-            Assert.AreEqual(3.141592653589793M, Library.PI/*, 0.01*/); // TODO
+            Assert.AreEqual(3.14, (double)Library.PI, 0.01);
         }
 
         [TestMethod]
         public void E_Test()
         {
-            Assert.AreEqual(2.718281828459045M, Library.E/*, 0.01*/); // TODO
+            Assert.AreEqual(2.7182, (double)Library.E, 0.0001);
         }
 
         [TestMethod]
