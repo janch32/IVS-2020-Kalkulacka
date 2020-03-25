@@ -5,33 +5,33 @@ namespace MathLib
 {
     public class MathLibrary : IMathLibrary
     {
-        public double PI => 3.141592653589793;
+        public decimal PI => 3.141592653589793M;
 
-        public double E => 2.718281828459045;
+        public decimal E => 2.718281828459045M;
 
-        public double Add(double a, double b)
+        public decimal Add(decimal a, decimal b)
         {
             return a + b;
         }
 
-        public double Sub(double a, double b)
+        public decimal Sub(decimal a, decimal b)
         {
             return a - b;
         }
 
-        public double Mul(double a, double b)
+        public decimal Mul(decimal a, decimal b)
         {
             return a * b;
         }
 
-        public double Div(double a, double b)
+        public decimal Div(decimal a, decimal b)
         {
             if (b == 0) throw new DivideByZeroException();
 
             return a / b;
         }
 
-        public double Factorial(double x)
+        public decimal Factorial(decimal x)
         {
             if(x < 0) throw new ArithmeticException(
                 "Factorial can only be calculated from positive number");
@@ -39,12 +39,12 @@ namespace MathLib
             if (x % 1 != 0) throw new ArithmeticException(
                 "Factorial can only be calculated from decimal number");
 
-            var res = x > 1 ? x : 1.0;
+            var res = x > 1 ? x : 1;
             while (x-- > 2) res *= x;
             return res;
         }
 
-        public double Power(double a, double n)
+        public decimal Power(decimal a, decimal n)
         {
             if (n % 1 != 0) throw new ArithmeticException(
                 "Power exponent must be decimal number");
@@ -55,12 +55,12 @@ namespace MathLib
                 a = 1 / a;
             }
 
-            var res = 1.0;
+            var res = 1M;
             while (n-- > 0) res *= a;
             return res;
         }
 
-        public double Root(double a, double n)
+        public decimal Root(decimal a, decimal n)
         {
             if (a < 0) throw new ArithmeticException(
                 "Root can only by calculated from positive number");
@@ -74,10 +74,11 @@ namespace MathLib
                 a = 1 / a;
             }
 
-            return Math.Pow(a, 1.0 / n); 
+            // TODO předělat na decimal
+            return (decimal)Math.Pow((double)a, (double)(1 / n)); 
         }
 
-        public double Modulo(double a, double b)
+        public decimal Modulo(decimal a, decimal b)
         {
             if (b == 0) throw new DivideByZeroException();
 
@@ -90,7 +91,7 @@ namespace MathLib
         private Scanner ExprScanner = new Scanner();
         private SyntaxChecker ExprSyntaxChecker = new SyntaxChecker();
         
-        public double EvaluateExpression(string expression)
+        public decimal EvaluateExpression(string expression)
         {
             var tokens = ExprScanner.GetTokens(expression);
             ExprSyntaxChecker.VerifySyntax(tokens);

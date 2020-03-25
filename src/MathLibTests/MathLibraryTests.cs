@@ -18,60 +18,60 @@ namespace MathLib.Tests
         [TestMethod]
         public void PI_Test()
         {
-            Assert.AreEqual(3.14, Library.PI, 0.01);
+            Assert.AreEqual(3.141592653589793M, Library.PI/*, 0.01*/); // TODO
         }
 
         [TestMethod]
         public void E_Test()
         {
-            Assert.AreEqual(2.71, Library.E, 0.01);
+            Assert.AreEqual(2.718281828459045M, Library.E/*, 0.01*/); // TODO
         }
 
         [TestMethod]
         public void Add_Test()
         {
-            double result = Library.Add(2.3, 3.6);
+            decimal result = Library.Add(2.3M, 3.6M);
 
-            Assert.AreEqual(5.9, result, 0.01);
+            Assert.AreEqual(5.9M, result);
         }
 
         [TestMethod]
         public void Sub_Test()
         {
-            double result = Library.Sub(3.0, 1.5);
+            decimal result = Library.Sub(3.0M, 1.5M);
 
-            Assert.AreEqual(1.5, result, 0.01);
+            Assert.AreEqual(1.5M, result);
         }
 
         [TestMethod]
         public void Sub_NegativeResult_Test()
         {
-            double result = Library.Sub(1.5, 1.6);
+            decimal result = Library.Sub(1.5M, 1.6M);
 
-            Assert.AreEqual(-0.1, result, 0.01);
+            Assert.AreEqual(-0.1M, result);
         }
 
         [TestMethod]
         public void Mul_Test()
         {
-            double result = Library.Mul(3.2, 4.8);
+            decimal result = Library.Mul(3.2M, 4.8M);
 
-            Assert.AreEqual(15.36, result, 0.01);
+            Assert.AreEqual(15.36M, result);
         }
 
         [TestMethod]
         [ExpectedException(typeof(DivideByZeroException))]
         public void Div_Zero_Test()
         {
-            Library.Div(1.5, 0.0);
+            Library.Div(1.5M, 0.0M);
         }
 
         [TestMethod]
         public void Div_Test()
         {
-            double result = Library.Div(1.5, 3.0);
+            decimal result = Library.Div(1.5M, 3.0M);
 
-            Assert.AreEqual(0.5, result, 0.01);
+            Assert.AreEqual(0.5M, result);
         }
 
         [TestMethod]
@@ -85,19 +85,19 @@ namespace MathLib.Tests
         public void Factorial_Test()
         {
             var testCases = new[] {
-                new Tuple<int, double>(0, 1),
-                new Tuple<int, double>(1, 1),
-                new Tuple<int, double>(2, 2),
-                new Tuple<int, double>(3, 6),
-                new Tuple<int, double>(4, 24),
-                new Tuple<int, double>(5, 120),
-                new Tuple<int, double>(7, 5040),
-                new Tuple<int, double>(15, 1307674368000)
+                new Tuple<int, decimal>(0, 1),
+                new Tuple<int, decimal>(1, 1),
+                new Tuple<int, decimal>(2, 2),
+                new Tuple<int, decimal>(3, 6),
+                new Tuple<int, decimal>(4, 24),
+                new Tuple<int, decimal>(5, 120),
+                new Tuple<int, decimal>(7, 5040),
+                new Tuple<int, decimal>(15, 1307674368000)
             };
 
             foreach (var testCase in testCases)
             {
-                double result = Library.Factorial(testCase.Item1);
+                decimal result = Library.Factorial(testCase.Item1);
                 Assert.AreEqual(testCase.Item2, result);
             }
         }
@@ -105,9 +105,9 @@ namespace MathLib.Tests
         [TestMethod]
         public void Power_ZeroToZero_Test()
         {
-            double result = Library.Power(0.0, 0);
+            decimal result = Library.Power(0, 0);
 
-            Assert.AreEqual(1.0, result);
+            Assert.AreEqual(1.0M, result);
         }
 
         [TestMethod]
@@ -115,18 +115,18 @@ namespace MathLib.Tests
         {
             var testCases = new[]
             {
-                new Tuple<double, int, double>(1.0, 2, 1.0),
-                new Tuple<double, int, double>(2.0, 2, 4.0),
-                new Tuple<double, int, double>(3.0, 2, 9.0),
-                new Tuple<double, int, double>(4.0, 2, 16.0),
-                new Tuple<double, int, double>(2.0, 5, 32.0),
-                new Tuple<double, int, double>(1.4, 2, 1.96)
+                new Tuple<decimal, int, decimal>(1.0M, 2, 1.0M),
+                new Tuple<decimal, int, decimal>(2.0M, 2, 4.0M),
+                new Tuple<decimal, int, decimal>(3.0M, 2, 9.0M),
+                new Tuple<decimal, int, decimal>(4.0M, 2, 16.0M),
+                new Tuple<decimal, int, decimal>(2.0M, 5, 32.0M),
+                new Tuple<decimal, int, decimal>(1.4M, 2, 1.96M)
             };
 
             foreach (var testCase in testCases)
             {
-                double result = Library.Power(testCase.Item1, testCase.Item2);
-                Assert.AreEqual(testCase.Item3, result, 0.1);
+                decimal result = Library.Power(testCase.Item1, testCase.Item2);
+                Assert.AreEqual(testCase.Item3, result);
             }
         }
 
@@ -134,7 +134,7 @@ namespace MathLib.Tests
         [ExpectedException(typeof(ArithmeticException))]
         public void Root_InvalidValue_Test()
         {
-            Library.Root(-15.0, 2);
+            Library.Root(-15.0M, 2);
         }
 
         [TestMethod]
@@ -142,17 +142,17 @@ namespace MathLib.Tests
         {
             var testCases = new[]
             {
-                new Tuple<double, int, double>(25.0, 2, 5.0),
-                new Tuple<double, int, double>(16.0, 2, 4.0),
-                new Tuple<double, int, double>(9.0, 2, 3.0),
-                new Tuple<double, int, double>(4.0, 2, 2.0),
-                new Tuple<double, int, double>(2.0, 2, 1.41421)
+                new Tuple<decimal, int, decimal>(25.0M, 2, 5.0M),
+                new Tuple<decimal, int, decimal>(16.0M, 2, 4.0M),
+                new Tuple<decimal, int, decimal>(9.0M, 2, 3.0M),
+                new Tuple<decimal, int, decimal>(4.0M, 2, 2.0M),
+                new Tuple<decimal, int, decimal>(2.0M, 2, 1.41421M)
             };
 
             foreach (var testCase in testCases)
             {
-                double result = Library.Root(testCase.Item1, testCase.Item2);
-                Assert.AreEqual(testCase.Item3, result, 0.00001);
+                decimal result = Library.Root(testCase.Item1, testCase.Item2);
+                Assert.AreEqual((double)testCase.Item3, (double)result, 0.00001);
             }
         }
 
@@ -161,16 +161,16 @@ namespace MathLib.Tests
         {
             var testCases = new[]
             {
-                new Tuple<double, int, double>(3.5, 2, 1.5),
-                new Tuple<double, int, double>(4.8, 3, 1.8),
-                new Tuple<double, int, double>(3.6, 42, 3.6),
-                new Tuple<double, int, double>(18625536.15, 156166, 41782.15)
+                new Tuple<decimal, int, decimal>(3.5M, 2, 1.5M),
+                new Tuple<decimal, int, decimal>(4.8M, 3, 1.8M),
+                new Tuple<decimal, int, decimal>(3.6M, 42, 3.6M),
+                new Tuple<decimal, int, decimal>(18625536.15M, 156166, 41782.15M)
             };
 
             foreach (var testCase in testCases)
             {
-                double result = Library.Modulo(testCase.Item1, testCase.Item2);
-                Assert.AreEqual(testCase.Item3, result, 0.001);
+                decimal result = Library.Modulo(testCase.Item1, testCase.Item2);
+                Assert.AreEqual(testCase.Item3, result);
             }
         }
 
@@ -179,59 +179,60 @@ namespace MathLib.Tests
         {
             var testCases = new[]
             {
-                new Tuple<string, double>("1+1", 2.0),
-                new Tuple<string, double>("1 + 1", 2.0),
-                new Tuple<string, double>("1 - 1", 0.0),
-                new Tuple<string, double>("42 - 36", 6.0),
-                new Tuple<string, double>("48.6 * 32", 1555.2),
-                new Tuple<string, double>("4^2", 16.0),
-                new Tuple<string, double>("16 root 2", 4.0),
-                new Tuple<string, double>("16 % 2", 0.0),
-                new Tuple<string, double>("17 % 3", 2.0),
-                new Tuple<string, double>("4/2", 2.0),
-                new Tuple<string, double>("4!", 24.0),
-                new Tuple<string, double>("4! + 42*3", 150.0),
-                new Tuple<string, double>("(1+1)*4+42", 50.0),
-                new Tuple<string, double>("(((((1)+1)+1)+1)+1)*3", 15.0),
-                new Tuple<string, double>("(1+1) * (3/2) + 4", 7.0),
-                new Tuple<string, double>("400 * 500 + (42 / 3) * 3! * (15 root 3)", 200207.1618),
-                new Tuple<string, double>("(25 % 3) * 42", 42.0),
-                new Tuple<string, double>("10", 10.0),
-                new Tuple<string, double>("300.5 * 400.3", 120290.15),
-                new Tuple<string, double>("10.5 * 0", 0.0),
-                new Tuple<string, double>("((((5 + ((6 / 4.0) ^ 3)) / 1) / 10) * (8 + ((3 ^ 6) / 4))) * 2", 318.66875),
-                new Tuple<string, double>("3*(4^5)-2/5*(3-7)", 3073.6),
-                new Tuple<string, double>("              3348.36562                        *                   12 ^ 6", 9998166167.0),
-                new Tuple<string, double>("0", 0.0),
-                new Tuple<string, double>("5!*5!", 14400.0),
-                new Tuple<string, double>("((((   1!   )  *  2!)   *   3!)    *    4!)", 288.0),
-                new Tuple<string, double>("1/1/1/1/1/1/1/1", 1.0),
-                new Tuple<string, double>("9/8/7/6", 0.02678571429),
-                new Tuple<string, double>("9 - 7  -  6   - 5  -   4   -3-2-1", -27.0),
-                new Tuple<string, double>("4^8", 65536.0),
-                new Tuple<string, double>("5    root    42", 1.039063628),
-                new Tuple<string, double>("5 % 2", 1.0),
-                new Tuple<string, double>("(5+1)!", 720.0)
+                new Tuple<string, decimal>("2/5*4", 1.6M),
+                new Tuple<string, decimal>("1+1", 2.0M),
+                new Tuple<string, decimal>("1 + 1", 2.0M),
+                new Tuple<string, decimal>("1 - 1", 0.0M),
+                new Tuple<string, decimal>("42 - 36", 6.0M),
+                new Tuple<string, decimal>("48.6 * 32", 1555.2M),
+                new Tuple<string, decimal>("4^2", 16.0M),
+                new Tuple<string, decimal>("16 root 2", 4.0M),
+                new Tuple<string, decimal>("16 % 2", 0.0M),
+                new Tuple<string, decimal>("17 % 3", 2.0M),
+                new Tuple<string, decimal>("4/2", 2.0M),
+                new Tuple<string, decimal>("4!", 24.0M),
+                new Tuple<string, decimal>("4! + 42*3", 150.0M),
+                new Tuple<string, decimal>("(1+1)*4+42", 50.0M),
+                new Tuple<string, decimal>("(((((1)+1)+1)+1)+1)*3", 15.0M),
+                new Tuple<string, decimal>("(1+1) * (3/2) + 4", 7.0M),
+                new Tuple<string, decimal>("400 * 500 + (42 / 3) * 3! * (15 root 3)", 200207.1618M),
+                new Tuple<string, decimal>("(25 % 3) * 42", 42.0M),
+                new Tuple<string, decimal>("10", 10.0M),
+                new Tuple<string, decimal>("300.5 * 400.3", 120290.15M),
+                new Tuple<string, decimal>("10.5 * 0", 0.0M),
+                new Tuple<string, decimal>("((((5 + ((6 / 4.0) ^ 3)) / 1) / 10) * (8 + ((3 ^ 6) / 4))) * 2", 318.66875M),
+                new Tuple<string, decimal>("3*(4^5)-2/5*(3-7)", 3073.6M),
+                new Tuple<string, decimal>("              3348.36562                        *                   12 ^ 6", 9998166167.0M),
+                new Tuple<string, decimal>("0", 0.0M),
+                new Tuple<string, decimal>("5!*5!", 14400.0M),
+                new Tuple<string, decimal>("((((   1!   )  *  2!)   *   3!)    *    4!)", 288.0M),
+                new Tuple<string, decimal>("1/1/1/1/1/1/1/1", 1.0M),
+                new Tuple<string, decimal>("9/8/7/6", 0.02678571429M),
+                new Tuple<string, decimal>("9 - 7  -  6   - 5  -   4   -3-2-1", -19.0M),
+                new Tuple<string, decimal>("4^8", 65536.0M),
+                new Tuple<string, decimal>("5    root    42", 1.039063628M),
+                new Tuple<string, decimal>("5 % 2", 1.0M),
+                new Tuple<string, decimal>("(5+1)!", 720.0M)
             };
 
             foreach (var testCase in testCases)
             {
-                double result = Library.EvaluateExpression(testCase.Item1);
-                Assert.AreEqual(testCase.Item2, result, 0.1);
+                decimal result = Library.EvaluateExpression(testCase.Item1);
+                Assert.AreEqual((double)testCase.Item2, (double)result, 0.1);
             }
         }
 
         [TestMethod]
         public void EvaluateExpression_PI_Test()
         {
-            double result = Library.EvaluateExpression("PI");
+            decimal result = Library.EvaluateExpression("PI");
             Assert.AreEqual(Library.PI, result);
         }
 
         [TestMethod]
         public void EvaluateExpression_E_Test()
         {
-            double result = Library.EvaluateExpression("E");
+            decimal result = Library.EvaluateExpression("E");
             Assert.AreEqual(Library.E, result);
         }
 

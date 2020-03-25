@@ -10,7 +10,7 @@ namespace MathLib.Expression
 
         // Jo, dal jsem tam object, zažaluj mě
         //
-        // Ale kdyby byla jiná cesta jak do listu narvat Token, double a Enum,
+        // Ale kdyby byla jiná cesta jak do listu narvat Token, decimal a Enum,
         // tak bych to rád zkrášlil. Zatím jsem ale na nic jiného nepřišel.
         private readonly List<object> Stack = new List<object>();
 
@@ -24,10 +24,10 @@ namespace MathLib.Expression
                 "Stack does not contain any Token");
         }
 
-        public double FirstValue()
+        public decimal FirstValue()
         {
             foreach (var item in Stack)
-                if (item is double value) return value;
+                if (item is decimal value) return value;
 
             throw new ParseException(
                 "Cannot get value from parser stack");
@@ -61,9 +61,9 @@ namespace MathLib.Expression
             }
         }
 
-        private double Evaluate()
+        private decimal Evaluate()
         {
-            var val = new List<double>();
+            var val = new List<decimal>();
             Token op = null;
 
             for (int i = Stack.Count - 1; i >= 0; i--)
@@ -74,7 +74,7 @@ namespace MathLib.Expression
                     break;
                 }
 
-                if (Stack[i] is double value) val.Add(value);
+                if (Stack[i] is decimal value) val.Add(value);
                 else if (Stack[i] is Token token) op = token;
                 else throw new ParseException(
                     $"Unknown item in parser stack \"{Stack[i]}\"");
@@ -120,7 +120,7 @@ namespace MathLib.Expression
                 switch (op.Type)
                 {
                     case TokenType.Number:
-                        return double.Parse(op.Value, CultureInfo.InvariantCulture);
+                        return decimal.Parse(op.Value, CultureInfo.InvariantCulture);
                     case TokenType.Pi:
                         if (op.Value.Contains("-")) return -Math.PI;
                         return Math.PI;

@@ -16,7 +16,7 @@ namespace MathLib.Expression
             Stack.Push(new Token(TokenType.None, "", 0));
         }
 
-        public double Evaluate()
+        public decimal Evaluate()
         {
             while (Input.Count > 1 || !Stack.Empty)
             {
