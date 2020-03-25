@@ -36,7 +36,7 @@ namespace MathLib
             if(x < 0) throw new ArithmeticException(
                 "Factorial can only be calculated from positive number");
 
-            if (x % 1 == 0) throw new ArithmeticException(
+            if (x % 1 != 0) throw new ArithmeticException(
                 "Factorial can only be calculated from decimal number");
 
             var res = x > 1 ? x : 1.0;
@@ -46,7 +46,7 @@ namespace MathLib
 
         public double Power(double a, double n)
         {
-            if (n % 1 == 0) throw new ArithmeticException(
+            if (n % 1 != 0) throw new ArithmeticException(
                 "Power exponent must be decimal number");
 
             if (n < 0)
@@ -65,7 +65,7 @@ namespace MathLib
             if (a < 0) throw new ArithmeticException(
                 "Root can only by calculated from positive number");
 
-            if (n % 1 == 0) throw new ArithmeticException(
+            if (n % 1 != 0) throw new ArithmeticException(
                 "Root must be decimal number");
 
             return Math.Pow(a, 1.0 / n); 
@@ -89,7 +89,9 @@ namespace MathLib
             var tokens = ExprScanner.GetTokens(expression);
             ExprSyntaxChecker.VerifySyntax(tokens);
 
-            throw new NotImplementedException();
+            var parser = new Parser(tokens);
+
+            return parser.Evaluate();
         }
     }
 }

@@ -7,25 +7,45 @@ namespace MathLib.Expression
 {
     class Parser
     {
-        private List<Token> InputTokens;
-        private PrecedenceTable PrecedenceTable = new PrecedenceTable();
-
-        // Jo, dal jsem tam object, zažaluj mě
-        //
-        // Ale kdyby byla jiná cesta jak do listu narvat Token, NonTerm a Enum,
-        // tak bych to rád zkrášlil. Zatím jsem ale na nic jiného nepřišel.
-        private List<object> EvaluateStack = new List<object>();
-
+        private PrecedenceTable Table = new PrecedenceTable();
+        private List<Token> Input;
+        private ParserStack Stack = new ParserStack();
+        
         public Parser(Token[] tokens)
         {
-            InputTokens = new List<Token>(tokens);
-            InputTokens.Add(new Token(TokenType.None, "", -1));
-            EvaluateStack.Add(new Token(TokenType.None, "", 0));
+            Input = new List<Token>(tokens);
+            Input.Add(new Token(TokenType.None, "", -1));
+            Stack.Push(new Token(TokenType.None, "", 0));
         }
 
-        private void Parse(Token input)
+        public double Evaluate()
         {
-            
+            while (Input.Count > 1 || !Stack.Empty)
+            {
+                var token = Input[0];
+                var pr = Table.GetPrecedence(token.Type, Stack.LastToken().Type);
+                Stack.Push(pr);
+
+                switch (pr)
+                {
+                    case Precedence.Right:
+                        Stack.Push(token);
+                        Input.Remove(token);
+                        break;
+                    case Precedence.Equals:
+                        Input.Remove(token);
+                        break;
+                }
+            }
+
+            try
+            {
+                return Stack.FirstValue();
+            }
+            catch (ParseException)
+            {
+                return 0;
+            }
         }
     }
 }

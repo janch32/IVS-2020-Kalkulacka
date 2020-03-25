@@ -7,22 +7,27 @@ namespace MathLib.Expression
 {
     class ParserStack
     {
-        private MathLibrary Math = new MathLibrary();
-        private List<object> stack = new List<object>();
+        private readonly MathLibrary Math = new MathLibrary();
 
-        private Token GetLastToken()
+        // Jo, dal jsem tam object, zažaluj mě
+        //
+        // Ale kdyby byla jiná cesta jak do listu narvat Token, double a Enum,
+        // tak bych to rád zkrášlil. Zatím jsem ale na nic jiného nepřišel.
+        private readonly List<object> Stack = new List<object>();
+
+        public Token LastToken()
         {
-            for (int i = stack.Count - 1; i >= 0; i--)
-                if (stack[i] is Token token) return token;
+            for (int i = Stack.Count - 1; i >= 0; i--)
+                if (Stack[i] is Token token) return token;
 
             throw new ParseException(
                 "Cannot get last token from parser stack. " +
                 "Stack does not contain any Token");
         }
 
-        public double GetFirstValue()
+        public double FirstValue()
         {
-            foreach (var item in stack)
+            foreach (var item in Stack)
                 if (item is double value) return value;
 
             throw new ParseException(
@@ -31,7 +36,12 @@ namespace MathLib.Expression
 
         public void Push(Token token)
         {
-            stack.Add(token);
+            Stack.Add(token);
+        }
+
+        public bool Empty
+        {
+            get => Stack.Count == 0 || LastToken().Type == TokenType.None;
         }
 
         public void Push(Precedence precedence)
@@ -40,11 +50,11 @@ namespace MathLib.Expression
             {
                 case Precedence.Equals:
                 case Precedence.Left:
-                    Evaluate();
+                    Stack.Add(Evaluate());
                     break;
                 case Precedence.Right:
-                    stack.Insert(
-                        stack.LastIndexOf(GetLastToken()) + 1, 
+                    Stack.Insert(
+                        Stack.LastIndexOf(LastToken()) + 1, 
                         precedence);
                     break;
                 default:
@@ -57,42 +67,72 @@ namespace MathLib.Expression
             var val = new List<double>();
             Token op = null;
 
-            for (int i = stack.Count - 1; i >= 0; i--)
+            for (int i = Stack.Count - 1; i >= 0; i--)
             {
-                if (stack[i] is Precedence precedence) break;
-                else if (stack[i] is double value) val.Add(value);
-                else if (stack[i] is Token token) op = token;
+                if (Stack[i] is Precedence)
+                {
+                    Stack.RemoveAt(i);
+                    break;
+                }
+
+                if (Stack[i] is double value) val.Add(value);
+                else if (Stack[i] is Token token) op = token;
                 else throw new ParseException(
-                    $"Unknown item in parser stack \"{stack[i]}\"");
+                    $"Unknown item in parser stack \"{Stack[i]}\"");
+
+                Stack.RemoveAt(i);
             }
 
-            switch (op?.Type ?? TokenType.None)
+            if (op == null) throw new ParseException(
+                "Cannot evaulate stack. No operand in expression");
+
+            if(val.Count == 2)
             {
-                case TokenType.Add:
-                    return Math.Add(val[1], val[0]);
-                case TokenType.Subtract:
-                    return Math.Sub(val[1], val[0]);
-                case TokenType.Multiply:
-                    return Math.Mul(val[1], val[0]);
-                case TokenType.Divide:
-                    return Math.Div(val[1], val[0]);
-                case TokenType.Power:
-                    return Math.Power(val[1], val[0]);
-                case TokenType.Root:
-                    return Math.Root(val[1], val[0]);
-                case TokenType.Modulo:
-                    return Math.Modulo(val[1], val[0]);
-                case TokenType.Factorial:
-                    return Math.Factorial(val[0]);
-                case TokenType.LeftBracket:
-                    return val[0];
-                case TokenType.Number:
-                    return double.Parse(op.Value);
-                case TokenType.Pi:
-                    return Math.PI;
-                case TokenType.Euler:
-                    return Math.E;
+                switch (op.Type)
+                {
+                    case TokenType.Add:
+                        return Math.Add(val[1], val[0]);
+                    case TokenType.Subtract:
+                        return Math.Sub(val[1], val[0]);
+                    case TokenType.Multiply:
+                        return Math.Mul(val[1], val[0]);
+                    case TokenType.Divide:
+                        return Math.Div(val[1], val[0]);
+                    case TokenType.Power:
+                        return Math.Power(val[1], val[0]);
+                    case TokenType.Root:
+                        return Math.Root(val[1], val[0]);
+                    case TokenType.Modulo:
+                        return Math.Modulo(val[1], val[0]);
+                }
             }
+            else if (val.Count == 1)
+            {
+                switch (op.Type)
+                {
+                    case TokenType.Factorial:
+                        return Math.Factorial(val[0]);
+                    case TokenType.LeftBracket:
+                        return val[0];
+                }
+            }
+            else
+            {
+                switch (op.Type)
+                {
+                    case TokenType.Number:
+                        return double.Parse(op.Value);
+                    case TokenType.Pi:
+                        if (op.Value.Contains("-")) return -Math.PI;
+                        return Math.PI;
+                    case TokenType.Euler:
+                        if (op.Value.Contains("-")) return -Math.E;
+                        return Math.E;
+                }
+            }
+
+            throw new ParseException(
+                "Cannot evaulate stack. Wrong number of arguments or unknown operand");
         }
     }
 }

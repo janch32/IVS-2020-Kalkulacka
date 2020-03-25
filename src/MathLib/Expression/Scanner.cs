@@ -16,11 +16,11 @@ namespace MathLib.Expression
         private readonly Regex Factorial = new Regex(@"^\s*!");
         private readonly Regex LeftBracket = new Regex(@"^\s*\(");
         private readonly Regex RightBracket = new Regex(@"^\s*\)");
-        private readonly Regex Number = new Regex(@"^\s*-?([1-9]\d*|0)((\.|,)\d+)?");
+        private readonly Regex Number = new Regex(@"^\s*([1-9]\d*|0)((\.|,)\d+)?");
         private readonly Regex Pi = new Regex(@"^\s*(pi|π)", RegexOptions.IgnoreCase);
         private readonly Regex Euler = new Regex(@"^\s*(e|euler)", RegexOptions.IgnoreCase);
 
-        public Token GetToken(string expr)
+        private Token GetToken(string expr)
         {
             Match match;
 
@@ -67,6 +67,38 @@ namespace MathLib.Expression
                 $"Unknown token \"{expr}\"");
         }
 
+        private void OptimizeNumber(List<Token> tokens)
+        {
+            if (tokens.Count < 2) return;
+
+            var num = tokens[^1];
+            if (num.Type != TokenType.Number &&
+                num.Type != TokenType.Pi &&
+                num.Type != TokenType.Euler)
+                return;
+
+            var curr = tokens[^2];
+            if (curr.Type != TokenType.Add &&
+                curr.Type != TokenType.Subtract)
+                return;
+
+            if(tokens.Count > 2)
+            {
+                var prev = tokens[^3];
+                if (prev.Type == TokenType.Factorial ||
+                    prev.Type == TokenType.RightBracket ||
+                    prev.Type == TokenType.Number ||
+                    prev.Type == TokenType.Pi ||
+                    prev.Type == TokenType.Euler)
+                    return;
+            }
+
+            curr.Type = num.Type;
+            if (num.Type == TokenType.Number)
+                curr.Value += num.Value;
+            tokens.Remove(num);
+        }
+
         public Token[] GetTokens(string expr)
         {
             expr = expr.Trim();
@@ -82,7 +114,9 @@ namespace MathLib.Expression
                     token.Position = pos;
                     pos += len;
                     expr = expr.Substring(len);
+
                     tokens.Add(token);
+                    OptimizeNumber(tokens);
                 }
             }
             catch (ParseException e)
