@@ -293,5 +293,33 @@ namespace MathLib.Tests
         {
             Library.EvaluateExpression("(6-8)!");
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParseException))]
+        public void OnlyVariablesInExpression_Test()
+        {
+            Library.EvaluateExpression("abcdefgh");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParseException))]
+        public void VariablesAndExpressions_Test()
+        {
+            Library.EvaluateExpression("1 + a");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ParseException))]
+        public void InvalidCombinationOfOperands_Test()
+        {
+            Library.EvaluateExpression("1 + 2 +-*/ 4");
+        }
+
+        [TestMethod]
+        public void EmptyExpression_Test()
+        {
+            var result = Library.EvaluateExpression("");
+            Assert.AreEqual(0, result);
+        }
     }
 }
