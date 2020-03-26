@@ -298,28 +298,28 @@ namespace MathLib.Tests
         [ExpectedException(typeof(ParseException))]
         public void OnlyVariablesInExpression_Test()
         {
-            Library.EvaluateExpression("abcdefgh");
+            new Expression.Parser("abcdefgh").Evaluate();
         }
 
         [TestMethod]
         [ExpectedException(typeof(ParseException))]
         public void VariablesAndExpressions_Test()
         {
-            Library.EvaluateExpression("1 + a");
+            new Expression.Parser("1 + a").Evaluate();
         }
 
         [TestMethod]
         [ExpectedException(typeof(ParseException))]
         public void InvalidCombinationOfOperands_Test()
         {
-            Library.EvaluateExpression("1 + 2 +-*/ 4");
+            new Expression.Parser("1 + 2 +-*/ 4").Evaluate();
         }
 
         [TestMethod]
         public void EmptyExpression_Test()
         {
-            var result = Library.EvaluateExpression("");
-            Assert.AreEqual(0, result);
+            var parser = new Expression.Parser("");
+            Assert.AreEqual(0, parser.Evaluate());
         }
     }
 }
