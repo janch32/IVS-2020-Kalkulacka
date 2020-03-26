@@ -83,15 +83,5 @@ namespace MathLib
         /// <exception cref="ArithmeticException">Throws when divisor is not decimal number</exception>
         /// <returns>Integer division remainder</returns>
         decimal Modulo(decimal a, decimal b);
-
-        /// <summary>
-        /// Parse and evaluate provided mathematical expression
-        /// </summary>
-        /// <param name="expression">Mathematical expression eg. "2 / (1 + 2) * 5"</param>
-        /// <exception cref="DivideByZeroException">Throws when division by zero happens when evaluating expression</exception>
-        /// <exception cref="ArithmeticException">Throws when invalid argument occurs in math function</exception>
-        /// <exception cref="ParseException">Throws when the provided string is an invalid expression</exception>
-        /// <returns>Mathematical expression result</returns>
-        decimal EvaluateExpression(string expression);
     }
 }

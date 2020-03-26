@@ -1,6 +1,6 @@
 ﻿namespace MathLib.Expression
 {
-    enum Precedence
+    internal enum Precedence
     {
         Left,
         Right,

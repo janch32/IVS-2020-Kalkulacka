@@ -5,6 +5,9 @@ namespace MathLib
 {
     public class MathLibrary : IMathLibrary
     {
+        private readonly Scanner ExprScanner = new Scanner();
+        private readonly SyntaxChecker ExprSyntaxChecker = new SyntaxChecker();
+
         public decimal PI => 3.141592653589793M;
 
         public decimal E => 2.718281828459045M;
@@ -33,8 +36,8 @@ namespace MathLib
 
         public decimal Factorial(decimal x)
         {
-            if(x < 0) throw new ArithmeticException(
-                "Factorial can only be calculated from positive number");
+            if (x < 0) throw new ArithmeticException(
+                 "Factorial can only be calculated from positive number");
 
             if (x % 1 != 0) throw new ArithmeticException(
                 "Factorial can only be calculated from decimal number");
@@ -75,7 +78,7 @@ namespace MathLib
             }
 
             // TODO předělat na decimal
-            return (decimal)Math.Pow((double)a, (double)(1 / n)); 
+            return (decimal)Math.Pow((double)a, (double)(1 / n));
         }
 
         public decimal Modulo(decimal a, decimal b)
@@ -84,21 +87,8 @@ namespace MathLib
 
             if (b < 0) throw new ArithmeticException(
                 "Modulo divisor must be decimal number");
-            
+
             return a % b;
-        }
-
-        private Scanner ExprScanner = new Scanner();
-        private SyntaxChecker ExprSyntaxChecker = new SyntaxChecker();
-        
-        public decimal EvaluateExpression(string expression)
-        {
-            var tokens = ExprScanner.GetTokens(expression);
-            ExprSyntaxChecker.VerifySyntax(tokens);
-
-            var parser = new Parser(tokens);
-
-            return parser.Evaluate();
         }
     }
 }

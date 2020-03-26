@@ -218,51 +218,51 @@ namespace MathLib.Tests
 
             foreach (var testCase in testCases)
             {
-                decimal result = Library.EvaluateExpression(testCase.Item1);
-                Assert.AreEqual((double)testCase.Item2, (double)result, 0.0001);
+                var parser = new Expression.Parser(testCase.Item1);
+                Assert.AreEqual((double)testCase.Item2, (double)parser.Evaluate(), 0.0001);
             }
         }
 
         [TestMethod]
         public void EvaluateExpression_PI_Test()
         {
-            decimal result = Library.EvaluateExpression("PI");
-            Assert.AreEqual(Library.PI, result);
+            var parser = new Expression.Parser("PI");
+            Assert.AreEqual(Library.PI, parser.Evaluate());
         }
 
         [TestMethod]
         public void EvaluateExpression_E_Test()
         {
-            decimal result = Library.EvaluateExpression("E");
-            Assert.AreEqual(Library.E, result);
+            var parser = new Expression.Parser("E");
+            Assert.AreEqual(Library.E, parser.Evaluate());
         }
 
         [TestMethod]
         [ExpectedException(typeof(ParseException))]
         public void UnknownOperator_Test()
         {
-            Library.EvaluateExpression("42|53");
+            new Expression.Parser("42|53").Evaluate();
         }
 
         [TestMethod]
         [ExpectedException(typeof(ParseException))]
         public void InvalidCountOfParenthes_Test()
         {
-            Library.EvaluateExpression("(35+42)+5)+2)");
+            new Expression.Parser("(35+42)+5)+2)").Evaluate();
         }
 
         [TestMethod]
         [ExpectedException(typeof(DivideByZeroException))]
         public void DivisionByZeroConstant_Test()
         {
-            Library.EvaluateExpression("6/0");
+            new Expression.Parser("6/0").Evaluate();
         }
 
         [TestMethod]
         [ExpectedException(typeof(DivideByZeroException))]
         public void DivisionByZeroDuringExpressionProcessing_Test()
         {
-            Library.EvaluateExpression("6/(3-3)");
+            new Expression.Parser("6/(3-3)").Evaluate();
         }
 
 
@@ -270,28 +270,28 @@ namespace MathLib.Tests
         [ExpectedException(typeof(ArithmeticException))]
         public void UndefinedRootConstant_Test()
         {
-            Library.EvaluateExpression("-15.0 root 2");
+            new Expression.Parser("-15.0 root 2").Evaluate();
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArithmeticException))]
         public void UndefinedRootDuringExpressiongProcessing_Test()
         {
-            Library.EvaluateExpression("(-5 * 3) root 2");
+            new Expression.Parser("(-5 * 3) root 2").Evaluate();
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArithmeticException))]
         public void NegativeFactorialConstant_Test()
         {
-            Library.EvaluateExpression("-5!");
+            new Expression.Parser("-5!").Evaluate();
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArithmeticException))]
         public void NegativeFactorialDuringExpressionProcessing_Test()
         {
-            Library.EvaluateExpression("(6-8)!");
+            new Expression.Parser("(6-8)!").Evaluate();
         }
     }
 }

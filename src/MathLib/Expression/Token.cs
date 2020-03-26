@@ -1,6 +1,6 @@
 ﻿namespace MathLib.Expression
 {
-    class Token
+    internal class Token
     {
         public TokenType Type;
         public string Value;

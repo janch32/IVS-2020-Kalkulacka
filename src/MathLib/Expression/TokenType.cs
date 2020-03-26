@@ -1,6 +1,6 @@
 ﻿namespace MathLib.Expression
 {
-    enum TokenType
+    internal enum TokenType
     {
         None,
         Add,

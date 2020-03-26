@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace MathLib.Expression
 {
-    class ParserStack
+    internal class ParserStack
     {
         private readonly MathLibrary Math = new MathLibrary();
 
@@ -13,6 +13,11 @@ namespace MathLib.Expression
         // Ale kdyby byla jiná cesta jak do listu narvat Token, decimal a Enum,
         // tak bych to rád zkrášlil. Zatím jsem ale na nic jiného nepřišel.
         private readonly List<object> Stack = new List<object>();
+
+        public bool Empty
+        {
+            get => Stack.Count == 0 || LastToken().Type == TokenType.None;
+        }
 
         public Token LastToken()
         {
@@ -36,11 +41,6 @@ namespace MathLib.Expression
         public void Push(Token token)
         {
             Stack.Add(token);
-        }
-
-        public bool Empty
-        {
-            get => Stack.Count == 0 || LastToken().Type == TokenType.None;
         }
 
         public void Push(Precedence precedence)

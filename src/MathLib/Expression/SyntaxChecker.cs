@@ -2,7 +2,7 @@
 
 namespace MathLib.Expression
 {
-    class SyntaxChecker
+    internal class SyntaxChecker
     {
         private bool VerifyTokenRelation(TokenType current, TokenType prev)
         {

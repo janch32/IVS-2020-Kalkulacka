@@ -4,12 +4,12 @@ using System.Text.RegularExpressions;
 
 namespace MathLib.Expression
 {
-    class Scanner
+    internal class Scanner
     {
         private readonly Regex Add = new Regex(@"^\+");
         private readonly Regex Subtract = new Regex(@"^-");
-        private readonly Regex Multiply = new Regex(@"^\*");
-        private readonly Regex Divide = new Regex(@"^\/");
+        private readonly Regex Multiply = new Regex(@"^(\*|×|⋅)");
+        private readonly Regex Divide = new Regex(@"^(\/|÷)");
         private readonly Regex Power = new Regex(@"^(pow|\^)", RegexOptions.IgnoreCase);
         private readonly Regex Root = new Regex(@"^root", RegexOptions.IgnoreCase);
         private readonly Regex Modulo = new Regex(@"^(mod|%)", RegexOptions.IgnoreCase);
