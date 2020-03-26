@@ -7,12 +7,7 @@ namespace MathLib.Expression
     internal class ParserStack
     {
         private readonly MathLibrary Math = new MathLibrary();
-
-        // Jo, dal jsem tam object, zažaluj mě
-        //
-        // Ale kdyby byla jiná cesta jak do listu narvat Token, decimal a Enum,
-        // tak bych to rád zkrášlil. Zatím jsem ale na nic jiného nepřišel.
-        private readonly List<object> Stack = new List<object>();
+        private readonly List<ParserStackItem> Stack = new List<ParserStackItem>();
 
         public bool Empty
         {
@@ -22,7 +17,7 @@ namespace MathLib.Expression
         public Token LastToken()
         {
             for (int i = Stack.Count - 1; i >= 0; i--)
-                if (Stack[i] is Token token) return token;
+                if (Stack[i].Token != null) return Stack[i].Token;
 
             throw new ParseException(
                 "Cannot get last token from parser stack. " +
@@ -32,7 +27,7 @@ namespace MathLib.Expression
         public decimal FirstValue()
         {
             foreach (var item in Stack)
-                if (item is decimal value) return value;
+                if (item.Value != null) return (decimal)item.Value;
 
             throw new ParseException(
                 "Cannot get value from parser stack");
@@ -40,7 +35,7 @@ namespace MathLib.Expression
 
         public void Push(Token token)
         {
-            Stack.Add(token);
+            Stack.Add(new ParserStackItem(token));
         }
 
         public void Push(Precedence precedence)
@@ -49,12 +44,12 @@ namespace MathLib.Expression
             {
                 case Precedence.Equals:
                 case Precedence.Left:
-                    Stack.Add(Evaluate());
+                    Stack.Add(new ParserStackItem(Evaluate()));
                     break;
                 case Precedence.Right:
                     Stack.Insert(
-                        Stack.LastIndexOf(LastToken()) + 1, 
-                        precedence);
+                        Stack.FindLastIndex(e => e.Token == LastToken()) + 1, 
+                        new ParserStackItem(precedence));
                     break;
                 default:
                     throw new ParseException("Invalid precedence type");
@@ -68,14 +63,14 @@ namespace MathLib.Expression
 
             for (int i = Stack.Count - 1; i >= 0; i--)
             {
-                if (Stack[i] is Precedence)
+                if (Stack[i].Precedence != null)
                 {
                     Stack.RemoveAt(i);
                     break;
                 }
 
-                if (Stack[i] is decimal value) val.Add(value);
-                else if (Stack[i] is Token token) op = token;
+                if (Stack[i].Value != null) val.Add((decimal)Stack[i].Value);
+                else if (Stack[i].Token != null) op = Stack[i].Token;
                 else throw new ParseException(
                     $"Unknown item in parser stack \"{Stack[i]}\"");
 
