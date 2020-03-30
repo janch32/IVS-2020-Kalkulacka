@@ -132,7 +132,8 @@ namespace MathLib.Expression
                     case TokenType.Power:
                         return Math.Power(val[1], val[0]);
                     case TokenType.Root:
-                        return Math.Root(val[1], val[0]);
+                        // Root method has swapped arguments
+                        return Math.Root(val[0], val[1]);
                     case TokenType.Modulo:
                         return Math.Modulo(val[1], val[0]);
                 }
@@ -141,6 +142,9 @@ namespace MathLib.Expression
             {
                 switch (op.Type)
                 {
+                    case TokenType.Root:
+                        // Root without second operand is square root
+                        return Math.Root(val[0], 2);
                     case TokenType.Factorial:
                         return Math.Factorial(val[0]);
                     case TokenType.LeftBracket:

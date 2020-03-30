@@ -8,12 +8,13 @@ namespace MathLib.Expression
         {
             switch (current)
             {
+                case TokenType.Root:
+                    return true;
                 case TokenType.Add:
                 case TokenType.Subtract:
                 case TokenType.Multiply:
                 case TokenType.Divide:
                 case TokenType.Power:
-                case TokenType.Root:
                 case TokenType.Modulo:
                 case TokenType.Factorial:
                 case TokenType.RightBracket:

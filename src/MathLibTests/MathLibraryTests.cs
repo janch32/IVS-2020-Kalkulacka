@@ -187,7 +187,8 @@ namespace MathLib.Tests
                 new Tuple<string, decimal>("48.6 * 32", 1555.2M),
                 new Tuple<string, decimal>("2/5*4", 1.6M),
                 new Tuple<string, decimal>("4^2", 16.0M),
-                new Tuple<string, decimal>("16 root 2", 4.0M),
+                new Tuple<string, decimal>("√16", 4.0M),
+                new Tuple<string, decimal>("2!√36√64", 2.0M),
                 new Tuple<string, decimal>("16 % 2", 0.0M),
                 new Tuple<string, decimal>("17 % 3", 2.0M),
                 new Tuple<string, decimal>("4/2", 2.0M),
@@ -196,14 +197,14 @@ namespace MathLib.Tests
                 new Tuple<string, decimal>("(1+1)*4+42", 50.0M),
                 new Tuple<string, decimal>("(((((1)+1)+1)+1)+1)*3", 15.0M),
                 new Tuple<string, decimal>("(1+1) * (3/2) + 4", 7.0M),
-                new Tuple<string, decimal>("400 * 500 + (42 / 3) * 3! * (15 root 3)", 200207.1618M),
+                new Tuple<string, decimal>("400 * 500 + (42 / 3) * 3! * (3√15)", 200207.1618M),
                 new Tuple<string, decimal>("(25 % 3) * 42", 42.0M),
                 new Tuple<string, decimal>("10", 10.0M),
                 new Tuple<string, decimal>("300.5 * 400.3", 120290.15M),
                 new Tuple<string, decimal>("10.5 * 0", 0.0M),
                 new Tuple<string, decimal>("((((5 + ((6 / 4.0) ^ 3)) / 1) / 10) * (8 + ((3 ^ 6) / 4))) * 2", 318.66875M),
                 new Tuple<string, decimal>("3*(4^5)-2/5*(3-7)", 3073.6M),
-                new Tuple<string, decimal>("              12^2^3  /  12^6root 6 - 12^(2,5*2)   ", 0.0M),
+                new Tuple<string, decimal>("              12^2^3  /  6√12^6 - 12^(2,5*2)   ", 0.0M),
                 new Tuple<string, decimal>("0", 0.0M),
                 new Tuple<string, decimal>("5!*5!", 14400.0M),
                 new Tuple<string, decimal>("((((   1!   )  *  2!)   *   3!)    *    4!)", 288.0M),
@@ -211,7 +212,7 @@ namespace MathLib.Tests
                 new Tuple<string, decimal>("9/8/7/6", 0.02678571429M),
                 new Tuple<string, decimal>("9 - 7  -  6   - 5  -   4   -3-2-1", -19.0M),
                 new Tuple<string, decimal>("4^8", 65536.0M),
-                new Tuple<string, decimal>("5    root    42", 1.039063628M),
+                new Tuple<string, decimal>("42    root    5", 1.039063628M),
                 new Tuple<string, decimal>("5 % 2", 1.0M),
                 new Tuple<string, decimal>("(5+1)!", 720.0M)
             };
@@ -270,14 +271,14 @@ namespace MathLib.Tests
         [ExpectedException(typeof(ArithmeticException))]
         public void UndefinedRootConstant_Test()
         {
-            new Expression.Parser("-15.0 root 2").Evaluate();
+            new Expression.Parser("root -15.0").Evaluate();
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArithmeticException))]
         public void UndefinedRootDuringExpressiongProcessing_Test()
         {
-            new Expression.Parser("(-5 * 3) root 2").Evaluate();
+            new Expression.Parser("3 root (-5 * 3)").Evaluate();
         }
 
         [TestMethod]

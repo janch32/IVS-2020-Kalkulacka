@@ -4,14 +4,18 @@ using System.Text.RegularExpressions;
 
 namespace MathLib.Expression
 {
+    /// <summary>
+    /// Scanner that splits expression string to individual <see cref="Token"/>s
+    /// </summary>
     internal class Scanner
     {
+        #region Regex rules for individual tokens
         private readonly Regex Add = new Regex(@"^\+");
         private readonly Regex Subtract = new Regex(@"^-");
         private readonly Regex Multiply = new Regex(@"^(\*|×|⋅)");
         private readonly Regex Divide = new Regex(@"^(\/|÷)");
         private readonly Regex Power = new Regex(@"^(pow|\^)", RegexOptions.IgnoreCase);
-        private readonly Regex Root = new Regex(@"^root", RegexOptions.IgnoreCase);
+        private readonly Regex Root = new Regex(@"^(root|√)", RegexOptions.IgnoreCase);
         private readonly Regex Modulo = new Regex(@"^(mod|%)", RegexOptions.IgnoreCase);
         private readonly Regex Factorial = new Regex(@"^!");
         private readonly Regex LeftBracket = new Regex(@"^\(");
@@ -19,7 +23,14 @@ namespace MathLib.Expression
         private readonly Regex Number = new Regex(@"^([1-9]\d*|0)((\.|,)\d+)?");
         private readonly Regex Pi = new Regex(@"^(pi|π)", RegexOptions.IgnoreCase);
         private readonly Regex Euler = new Regex(@"^(e|euler)", RegexOptions.IgnoreCase);
+        #endregion
 
+        /// <summary>
+        /// Get leftmost token from provided mathematical expression
+        /// </summary>
+        /// <param name="expr">Mathematical expression</param>
+        /// <exception cref="ParseException">Throws when expression contains unexpected sequence of characters</exception>
+        /// <returns>Leftmost token of expression</returns>
         private Token GetToken(string expr)
         {
             Match match;
@@ -67,6 +78,11 @@ namespace MathLib.Expression
                 $"Unknown token \"{expr}\"");
         }
 
+        /// <summary>
+        /// Merges neighboring add/sub token and number token if the re is no other neighboring number operator.
+        /// This is done as workaroud about negative numbers
+        /// </summary>
+        /// <param name="tokens">List of all scanned tokens</param>
         private void Optimize(List<Token> tokens)
         {
             if (tokens.Count < 2) return;
@@ -99,6 +115,12 @@ namespace MathLib.Expression
             tokens.Remove(num);
         }
 
+        /// <summary>
+        /// Split provided expression string to array of <see cref="Token"/>s
+        /// </summary>
+        /// <param name="expr">Mathematical expression</param>
+        /// <exception cref="ParseException">Throws when scanner finds unexpected sequence of characters in source string</exception>
+        /// <returns>Array of tokens from input string</returns>
         public Token[] GetTokens(string expr)
         {
             expr = expr.TrimEnd();
