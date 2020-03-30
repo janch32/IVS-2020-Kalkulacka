@@ -115,6 +115,12 @@
             return Precedence.Left;
         }
 
+        /// <summary>
+        /// Returns precendence of two tokens from precedence lookup table
+        /// </summary>
+        /// <param name="curr">Current (new) token</param>
+        /// <param name="prev">Previous token</param>
+        /// <returns>Precedence of current token in relation to previous token</returns>
         public Precedence GetPrecedence(TokenType curr, TokenType prev)
         {
             switch (prev)

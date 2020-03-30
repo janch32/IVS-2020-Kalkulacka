@@ -67,7 +67,7 @@ namespace MathLib.Expression
                 $"Unknown token \"{expr}\"");
         }
 
-        private void OptimizeNumber(List<Token> tokens)
+        private void Optimize(List<Token> tokens)
         {
             if (tokens.Count < 2) return;
 
@@ -120,7 +120,7 @@ namespace MathLib.Expression
                     pos += token.Value.Length;
 
                     tokens.Add(token);
-                    OptimizeNumber(tokens);
+                    Optimize(tokens);
                 }
             }
             catch (ParseException e)

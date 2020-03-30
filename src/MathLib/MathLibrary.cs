@@ -5,8 +5,6 @@ namespace MathLib
 {
     public class MathLibrary : IMathLibrary
     {
-        private readonly Scanner ExprScanner = new Scanner();
-        private readonly SyntaxChecker ExprSyntaxChecker = new SyntaxChecker();
 
         public decimal PI => 3.141592653589793M;
 

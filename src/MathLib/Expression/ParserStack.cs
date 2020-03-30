@@ -1,19 +1,32 @@
 ﻿using MathLib.Exceptions;
 using System.Collections.Generic;
 using System.Globalization;
+using System;
 
 namespace MathLib.Expression
 {
+    /// <summary>
+    /// Stack implementation for precedence climbing evaluation method.
+    /// This method is fully described in 8th presentation of the IFJ course (year 2020)
+    /// </summary>
     internal class ParserStack
     {
         private readonly MathLibrary Math = new MathLibrary();
         private readonly List<ParserStackItem> Stack = new List<ParserStackItem>();
 
+        /// <summary>
+        /// Returns true if stack is completely empty or contains only "stop" token
+        /// </summary>
         public bool Empty
         {
             get => Stack.Count == 0 || LastToken().Type == TokenType.None;
         }
 
+        /// <summary>
+        /// Returns topmost token from the stack
+        /// </summary>
+        /// <exception cref="ParseException">Throws when the stack does not contain any token</exception>
+        /// <returns>Last (topmost) token from the stack</returns>
         public Token LastToken()
         {
             for (int i = Stack.Count - 1; i >= 0; i--)
@@ -24,6 +37,11 @@ namespace MathLib.Expression
                 "Stack does not contain any Token");
         }
 
+        /// <summary>
+        /// Return first calculated value from stack
+        /// </summary>
+        /// <exception cref="ParseException">Throws when the stack does not contain any value</exception>
+        /// <returns>First (bottom) value in the stack</returns>
         public decimal FirstValue()
         {
             foreach (var item in Stack)
@@ -33,11 +51,22 @@ namespace MathLib.Expression
                 "Cannot get value from parser stack");
         }
 
+        /// <summary>
+        /// Pushes token to the end of the stack
+        /// </summary>
+        /// <param name="token">Token pushed onto the stack</param>
         public void Push(Token token)
         {
             Stack.Add(new ParserStackItem(token));
         }
 
+        /// <summary>
+        /// If <see cref="Precedence.Left"/> or <see cref="Precedence.Equals"/> is pushed, current 
+        /// stack will be evaluated and the result of this will be pushed to the stack.
+        /// Otherwise precedence sign will be placed in the stack after the topmost token
+        /// </summary>
+        /// <exception cref="ParseException">Throws when <see cref="Precedence.None"/> is passed in argument</exception>
+        /// <param name="precedence">Precedence value to be pushed on stack</param>
         public void Push(Precedence precedence)
         {
             switch (precedence)
@@ -56,6 +85,14 @@ namespace MathLib.Expression
             }
         }
 
+        /// <summary>
+        /// Evaluates part of stack from the top to first occurence of <see cref="Precedence.Right"/>.
+        /// This method uses methods provided by <see cref="MathLibrary"/>
+        /// </summary>
+        /// <exception cref="ParseException">Throws when the stack is malformed</exception>
+        /// <exception cref="DivideByZeroException">Throws when division by zero occurs when evaluating expression</exception>
+        /// <exception cref="ArithmeticException">Throws when invalid argument occurs in math function</exception>
+        /// <returns>Numerical result of the evaluation</returns>
         private decimal Evaluate()
         {
             var val = new List<decimal>();

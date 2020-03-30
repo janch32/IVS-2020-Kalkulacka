@@ -1,5 +1,9 @@
 ﻿namespace MathLib.Expression
 {
+    /// <summary>
+    /// This class defines all permitted types that can be pushed to the parser stack.
+    /// </summary>
+    /// <see cref="ParserStack"/>
     internal class ParserStackItem
     {
         public readonly decimal? Value = null;

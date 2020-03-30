@@ -57,7 +57,7 @@ namespace MathLib
         decimal Factorial(decimal n);
 
         /// <summary>
-        /// Calculate exponentiation of base <c>a</c> to the power of <c>n</c>
+        /// Calculate exponentiation of base <paramref name="a"/> to the power of <paramref name="n"/>
         /// </summary>
         /// <param name="a">Base</param>
         /// <param name="n">Exponent (decimal number)</param>
@@ -66,7 +66,7 @@ namespace MathLib
         decimal Power(decimal a, decimal n);
 
         /// <summary>
-        /// Calculate <c>n</c>th root of a number <c>a</c>, also known as root extraction
+        /// Calculate <paramref name="n"/>th root of a number <paramref name="a"/>, also known as root extraction
         /// </summary>
         /// <param name="a">Base</param>
         /// <param name="n">Root (decimal number)</param>
