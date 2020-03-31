@@ -1,10 +1,10 @@
 name: Build and Test Math Library
 on:
   push:
-    branches: 
+    branches:
       - master
   pull_request:
-    branches: 
+    branches:
       - master
 
 jobs:
@@ -13,21 +13,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    
+
     # Install .NET Core
     - name: Install .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    
-    # Install project dependencies
-    - name: Install dependencies
-      run: dotnet restore
-    
+
     # Build solution
     - name: Build
-      run: dotnet build --configuration Release --no-restore src/MathLib
-    
+      run: dotnet build --configuration Release src/MathLib
+
     # Run unit tests
     - name: Execute Unit Tests
-      run: dotnet test --no-restore --verbosity normal src/MathLibTests
+      run: dotnet test --verbosity normal src/MathLibTests
