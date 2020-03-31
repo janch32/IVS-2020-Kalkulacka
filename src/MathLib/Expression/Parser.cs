@@ -15,7 +15,6 @@ namespace MathLib.Expression
         private readonly List<Token> Input;
         private readonly ParserStack Stack = new ParserStack();
 
-
         /// <summary>
         /// Initialize parser for mathemetical expression
         /// </summary>
@@ -72,6 +71,8 @@ namespace MathLib.Expression
             }
             catch (ParseException)
             {
+                // If no value is on the stack (i.e. the input string is empty) 
+                // prevent exception throw and instead return zero
                 return 0;
             }
         }
