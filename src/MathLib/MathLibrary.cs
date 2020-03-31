@@ -1,56 +1,92 @@
 ﻿using System;
+using MathLib.Expression;
 
 namespace MathLib
 {
     public class MathLibrary : IMathLibrary
     {
-        public double PI => throw new NotImplementedException();
 
-        public double E => throw new NotImplementedException();
+        public decimal PI => 3.141592653589793M;
 
-        public double Add(double a, double b)
+        public decimal E => 2.718281828459045M;
+
+        public decimal Add(decimal a, decimal b)
         {
-            throw new NotImplementedException();
+            return a + b;
         }
 
-        public double Sub(double a, double b)
+        public decimal Sub(decimal a, decimal b)
         {
-            throw new NotImplementedException();
+            return a - b;
         }
 
-        public double Mul(double a, double b)
+        public decimal Mul(decimal a, decimal b)
         {
-            throw new NotImplementedException();
+            return a * b;
         }
 
-        public double Div(double a, double b)
+        public decimal Div(decimal a, decimal b)
         {
-            throw new NotImplementedException();
+            if (b == 0) throw new DivideByZeroException();
+
+            return a / b;
         }
 
-        public long Factorial(int x)
+        public decimal Factorial(decimal x)
         {
-            throw new NotImplementedException();
+            if (x < 0) throw new ArithmeticException(
+                 "Factorial can only be calculated from positive number");
+
+            if (x % 1 != 0) throw new ArithmeticException(
+                "Factorial can only be calculated from decimal number");
+
+            var res = x > 1 ? x : 1;
+            while (x-- > 2) res *= x;
+            return res;
         }
 
-        public double Power(double a, int n)
+        public decimal Power(decimal a, decimal n)
         {
-            throw new NotImplementedException();
+            if (n % 1 != 0) throw new ArithmeticException(
+                "Power exponent must be decimal number");
+
+            if (n < 0)
+            {
+                n = -n;
+                a = 1 / a;
+            }
+
+            var res = 1M;
+            while (n-- > 0) res *= a;
+            return res;
         }
 
-        public double Root(double a, int n)
+        public decimal Root(decimal a, decimal n)
         {
-            throw new NotImplementedException();
+            if (a < 0) throw new ArithmeticException(
+                "Root can only by calculated from positive number");
+
+            if (n % 1 != 0) throw new ArithmeticException(
+                "Root must be decimal number");
+
+            if (n < 0)
+            {
+                n = -n;
+                a = 1 / a;
+            }
+
+            // TODO předělat na decimal
+            return (decimal)Math.Pow((double)a, (double)(1 / n));
         }
 
-        public double Modulo(double a, int b)
+        public decimal Modulo(decimal a, decimal b)
         {
-            throw new NotImplementedException();
-        }
+            if (b == 0) throw new DivideByZeroException();
 
-        public double EvaluateExpression(string expression)
-        {
-            throw new NotImplementedException();
+            if (b < 0) throw new ArithmeticException(
+                "Modulo divisor must be decimal number");
+
+            return a % b;
         }
     }
 }
