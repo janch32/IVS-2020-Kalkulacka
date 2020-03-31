@@ -3,6 +3,10 @@ using System.Runtime.Serialization;
 
 namespace MathLib.Exceptions
 {
+    /// <summary>
+    /// Generic Exception for parse errors. 
+    /// Mainly for malformed input expression strings
+    /// </summary>
     [Serializable]
     public class ParseException : Exception
     {
