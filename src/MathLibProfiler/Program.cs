@@ -1,4 +1,5 @@
-﻿using MathLib.Expression;
+﻿using MathLib;
+using MathLib.Expression;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace MathLib.Profiler
+namespace MathLibProfiler
 {
     public static class Program
     {
@@ -14,11 +15,11 @@ namespace MathLib.Profiler
 
         public static void Main(string[] args)
         {
-            var useParser = args.Any(o => o.Equals("--use-parser", StringComparison.InvariantCultureIgnoreCase));
+            var useMath = args.Any(o => o.Equals("--use-math", StringComparison.InvariantCultureIgnoreCase));
 
             //var numbers = ReadNumbersFromStdin().ToArray();
             var numbers = File.ReadAllLines(args[0]).Select(decimal.Parse).ToArray();
-            var result = ComputeStandardDeviation(useParser, numbers);
+            var result = ComputeStandardDeviation(!useMath, numbers);
 
             Console.WriteLine(result);
         }

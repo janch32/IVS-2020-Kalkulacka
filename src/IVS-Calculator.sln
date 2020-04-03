@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathLib", "MathLib\MathLib.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathLibTests", "MathLibTests\MathLibTests.csproj", "{125B3676-2D7D-4DB1-8F9C-983C9C34AFCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathLib.Profiler", "MathLib.Profiler\MathLib.Profiler.csproj", "{268D030B-EBA8-4F21-9B07-4EA81F40DAE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathLibProfiler", "MathLibProfiler\MathLibProfiler.csproj", "{268D030B-EBA8-4F21-9B07-4EA81F40DAE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
