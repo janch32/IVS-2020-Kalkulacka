@@ -17,8 +17,8 @@ namespace MathLibProfiler
         {
             var useMath = args.Any(o => o.Equals("--use-math", StringComparison.InvariantCultureIgnoreCase));
 
-            //var numbers = ReadNumbersFromStdin().ToArray();
-            var numbers = File.ReadAllLines(args[0]).Select(decimal.Parse).ToArray();
+            var numbers = ReadNumbersFromStdin().ToArray();
+            //var numbers = File.ReadAllLines(args[0]).Select(decimal.Parse).ToArray(); // Pouze v případě profilace. 
             var result = ComputeStandardDeviation(!useMath, numbers);
 
             Console.WriteLine(result);
