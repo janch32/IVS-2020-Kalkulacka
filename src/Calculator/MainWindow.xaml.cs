@@ -31,22 +31,36 @@ namespace Calculator
             InitializeComponent();
             Library = MathLibraryFactory.Build();
         }
-
+        /// <summary>
+        ///     MOuse drag move.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">MouseButtonEventArgs.</param>
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+        /// <summary>
+        ///     Closes window.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">ExecutedRoutedEventArgs.</param>
         private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
             this.Close();
         }
+        /// <summary>
+        ///     Minimalizes window.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
         private void Window_Minimalize(object sender, RoutedEventArgs e)
         {
             MyWindow.WindowState = WindowState.Minimized;
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds number of button to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -55,7 +69,7 @@ namespace Calculator
             Expresion_TextBox.Text += ((Button)sender).Content.ToString();
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Deletes expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -64,7 +78,23 @@ namespace Calculator
             Expresion_TextBox.Text = "";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     deletes last char from expresion.
+		/// </summary>
+		/// <param name="sender">Sender object.</param>
+		/// <param name="e">RoutedEventArgs.</param>
+		private void Remove_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Expresion_TextBox.Text.Length > 1)
+            {
+                Expresion_TextBox.Text = Expresion_TextBox.Text.Remove(Expresion_TextBox.Text.Length - 1);
+            }
+            else
+            {
+                Expresion_TextBox.Text = "";
+            }
+        }
+        /// <summary>
+		///     Adds pi to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -73,7 +103,7 @@ namespace Calculator
             Expresion_TextBox.Text += "π";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds euler number to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -82,7 +112,7 @@ namespace Calculator
             Expresion_TextBox.Text += "e";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Calls math library with expresion and prints result.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -93,7 +123,7 @@ namespace Calculator
             Answer_TextBox.Text = v.ToString();
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds plus to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -102,7 +132,7 @@ namespace Calculator
             Expresion_TextBox.Text += "+";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds minus to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -111,7 +141,7 @@ namespace Calculator
             Expresion_TextBox.Text += "-";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds multiply to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -120,7 +150,7 @@ namespace Calculator
             Expresion_TextBox.Text += "*";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds divide to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -129,7 +159,7 @@ namespace Calculator
             Expresion_TextBox.Text += "/";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds left bracket to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -138,7 +168,7 @@ namespace Calculator
             Expresion_TextBox.Text += "(";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds right bracket to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -147,7 +177,7 @@ namespace Calculator
             Expresion_TextBox.Text += ")";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds exclamation mark to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -156,7 +186,7 @@ namespace Calculator
             Expresion_TextBox.Text += "!";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds % to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -165,7 +195,7 @@ namespace Calculator
             Expresion_TextBox.Text += "%";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds √ to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
@@ -174,7 +204,7 @@ namespace Calculator
             Expresion_TextBox.Text += "√";
         }
         /// <summary>
-		///     Handle numeric button click.
+		///     Adds ^ to expresion.
 		/// </summary>
 		/// <param name="sender">Sender object.</param>
 		/// <param name="e">RoutedEventArgs.</param>
