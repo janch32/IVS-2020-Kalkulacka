@@ -121,6 +121,8 @@ namespace Calculator
             var parser = new MathLib.Expression.Parser(Expresion_TextBox.Text);
             decimal v = parser.Evaluate();
             Answer_TextBox.Text = v.ToString();
+            //Answer_TextBox_Row.Height = new GridLength(0.6, GridUnitType.Star);
+            Grid.SetRowSpan(Expresion_TextBox,1);
         }
         /// <summary>
 		///     Adds plus to expresion.
