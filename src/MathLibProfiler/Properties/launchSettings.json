@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MathLib.Profiler": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\OneDrive\\School\\vutfit\\IVS\\IVS-2020-Kalkulacka\\src\\MathLibProfiler\\Data\\input_1000.txt"
+    }
+  }
+}
