@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System;
 
+// Useless warnings
+#pragma warning disable S4158
+
 namespace MathLib.Expression
 {
     /// <summary>
@@ -61,7 +64,7 @@ namespace MathLib.Expression
         }
 
         /// <summary>
-        /// If <see cref="Precedence.Left"/> or <see cref="Precedence.Equals"/> is pushed, current 
+        /// If <see cref="Precedence.Left"/> or <see cref="Precedence.Equals"/> is pushed, current
         /// stack will be evaluated and the result of this will be pushed to the stack.
         /// Otherwise precedence sign will be placed in the stack after the topmost token
         /// </summary>
@@ -77,7 +80,7 @@ namespace MathLib.Expression
                     break;
                 case Precedence.Right:
                     Stack.Insert(
-                        Stack.FindLastIndex(e => e.Token == LastToken()) + 1, 
+                        Stack.FindLastIndex(e => e.Token == LastToken()) + 1,
                         new ParserStackItem(precedence));
                     break;
                 default:
@@ -106,18 +109,22 @@ namespace MathLib.Expression
                     break;
                 }
 
-                if (Stack[i].Value != null) val.Add((decimal)Stack[i].Value);
-                else if (Stack[i].Token != null) op = Stack[i].Token;
-                else throw new ParseException(
-                    $"Unknown item in parser stack \"{Stack[i]}\"");
+                if (Stack[i].Value != null)
+                    val.Add((decimal)Stack[i].Value);
+                else if (Stack[i].Token != null)
+                    op = Stack[i].Token;
+                else
+                    throw new ParseException($"Unknown item in parser stack \"{Stack[i]}\"");
 
                 Stack.RemoveAt(i);
             }
 
-            if (op == null) throw new ParseException(
-                "Cannot evaulate stack. No operand in expression");
+            if (op == null)
+            {
+                throw new ParseException("Cannot evaulate stack. No operand in expression");
+            }
 
-            if(val.Count == 2)
+            if (val.Count == 2)
             {
                 switch (op.Type)
                 {

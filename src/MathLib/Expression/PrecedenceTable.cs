@@ -101,6 +101,7 @@
             return Precedence.Right;
         }
 
+        // TODO: From warning: Update this method so that its implementation is not identical to 'FactorialPrecedence'.
         private Precedence ValRBracketPrecedence(TokenType curr)
         {
             switch (curr)
