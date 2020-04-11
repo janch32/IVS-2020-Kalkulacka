@@ -2,31 +2,38 @@
 using MathLib.Expression;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace MathLibProfiler
 {
     public static class Program
     {
-        private static IMathLibrary Library = MathLibraryFactory.Build();
+        private static readonly IMathLibrary Library = MathLibraryFactory.Build();
 
         public static void Main(string[] args)
         {
+            // Priznak k pouziti matematicke knihovny, jinak je pouzit vypocet pres retezcove vyrazy.
             var useMath = args.Any(o => o.Equals("--use-math", StringComparison.InvariantCultureIgnoreCase));
 
-            var numbers = ReadNumbersFromStdin().ToArray();
-            //var numbers = File.ReadAllLines(args[0]).Select(decimal.Parse).ToArray(); // Pouze v případě profilace. 
+            var numbers = ReadData(args);
             var result = ComputeStandardDeviation(!useMath, numbers);
 
             Console.WriteLine(result);
         }
 
-        private static IEnumerable<decimal> ReadNumbersFromStdin()
+        private static decimal[] ReadData(string[] args)
         {
-            using var reader = new StreamReader(Console.OpenStandardInput());
+            // Urceni, ze se jedna o spusteni z profilovaci aplikace JetBrains dotTrace.
+            bool useFile = args.Length >= 2 && args[0] == "--use-file" && !string.IsNullOrEmpty(args[1]);
+
+            var stream = useFile ? File.OpenRead(args[1]) : Console.OpenStandardInput();
+            return ReadNumbersFromStream(stream).ToArray();
+        }
+
+        private static IEnumerable<decimal> ReadNumbersFromStream(Stream stream)
+        {
+            using var reader = new StreamReader(stream);
 
             while (!reader.EndOfStream)
                 yield return decimal.Parse(reader.ReadLine());
