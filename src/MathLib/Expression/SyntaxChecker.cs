@@ -50,14 +50,14 @@ namespace MathLib.Expression
                     prev = curr;
                     continue;
                 }
-                
+
                 if (prev == null)
                 {
                     throw new ParseException(
                         $"Syntax Error: Expression cannot start with type " +
                         $"{curr.Type}(\"{curr.Value}\")");
                 }
-                
+
                 throw new ParseException(
                     $"Syntax Error: Incompatible type {prev.Type}(\"{prev.Value}\") with" +
                     $" {curr.Type}(\"{curr.Value}\") on pos {curr.Position}");

@@ -11,10 +11,9 @@
         public readonly Precedence? Precedence = null;
 
         public ParserStackItem(Token token) => Token = token;
-        
-        public ParserStackItem(decimal value) => Value = value;
-        
-        public ParserStackItem(Precedence precedence) => Precedence = precedence;
 
+        public ParserStackItem(decimal value) => Value = value;
+
+        public ParserStackItem(Precedence precedence) => Precedence = precedence;
     }
 }

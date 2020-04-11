@@ -6,9 +6,9 @@
     internal class Token
     {
         public TokenType Type;
-        
+
         public string Value;
-        
+
         /// <summary>
         /// Position in original expression string (from left, beginning with zero)
         /// </summary>
