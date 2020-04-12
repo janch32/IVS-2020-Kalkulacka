@@ -3,23 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Calculator"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Bold"
         TextElement.FontSize="13" 
-        MouseDown="Window_MouseDown"
+        MouseDown="WindowMouseDown"
         AllowsTransparency="True" Background="Transparent" WindowStyle="None"
         FontFamily="{DynamicResource MaterialDesignFont}" 
-        x:Name="MyWindow"
         Title="Kalkulačka" Height="500" MinHeight="450" Width="400" MinWidth="350">
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Close"
                         Executed="CloseCommandHandler"/>
     </Window.CommandBindings>
-    <Border Background="#B2000000">
-        <Grid>
+    <Window.Resources>
+        <Style x:Key="LightButtonStyle" BasedOn="{StaticResource MaterialDesignRaisedLightButton}" TargetType = "Button">
+            <Setter Property = "Height" Value = "Auto"/>
+            <Setter Property = "Width" Value = "Auto"/>
+            <Setter Property = "FontSize" Value = "30"/>
+            <Setter Property = "Margin" Value = "5"/>
+        </Style>
+        <Style x:Key="AccentButtonStyle" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}" TargetType = "Button">
+            <Setter Property = "Height" Value = "Auto"/>
+            <Setter Property = "Width" Value = "Auto"/>
+            <Setter Property = "FontSize" Value = "30"/>
+            <Setter Property = "Margin" Value = "5"/>
+        </Style>
+        <Style x:Key="DarkButtonStyle" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType = "Button">
+            <Setter Property = "Height" Value = "Auto"/>
+            <Setter Property = "Width" Value = "Auto"/>
+            <Setter Property = "Margin" Value = "5"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Background="#B2000000">
             <!--definition of composition-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*" MinWidth="5"/>
@@ -29,7 +46,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.5*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="0.6*" x:Name="Answer_TextBox_Row"/>
+                <RowDefinition Height="0.6*" x:Name="AnswerRow"/>
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="0.2*"/>
@@ -37,259 +54,189 @@
 
             
             <Button 
-                x:Name="Close_Window_Button" Grid.Column="1"  Grid.Row="0" Width="35" Height="35" HorizontalAlignment="Right"
+                x:Name="CloseWindow" Grid.Column="1"  Grid.Row="0" Width="35" Height="35" HorizontalAlignment="Right"
                 Foreground="White" Margin="0 0 -10 0" Opacity="0.6" Command="ApplicationCommands.Close"
                 Style="{StaticResource MaterialDesignFlatAccentButton}">
                 <materialDesign:PackIcon
-                Kind="WindowClose"
-                Width="35"
-                Height="35"
-                Margin="-16 -4 -16 0"
-                />
+                    Kind="WindowClose" Width="35" Height="35" Margin="-16 -4 -16 0"/>
             </Button>
             <Button 
-                x:Name="Minimalize_Window_Button" Grid.Column="1"  Grid.Row="0" Width="30" Height="30" HorizontalAlignment="Right"
-                Foreground="White" Margin="0 10 25 0" Opacity="0.6" Click="Window_Minimalize"
+                x:Name="MinimalizeWindow" Grid.Column="1"  Grid.Row="0" Width="30" Height="30" HorizontalAlignment="Right"
+                Foreground="White" Margin="0 10 25 0" Opacity="0.6" Click="WindowMinimalize"
                 Style="{StaticResource MaterialDesignFlatAccentButton}">
                 <materialDesign:PackIcon
-                Kind="WindowMinimize"
-                Width="30"
-                Height="30"
-                Margin="-16 -4 -16 0"
-                />
+                    Kind="WindowMinimize" Width="30" Height="30" Margin="-16 -4 -16 0"/>
             </Button>
             <Button 
                  Grid.Column="1"  Grid.Row="0" Width="35" Height="35" HorizontalAlignment="Right"
                 Foreground="White" Margin="0 2 50 0" Opacity="0.6" Command="ApplicationCommands.Close"
                 Style="{StaticResource MaterialDesignFlatAccentButton}">
                 <materialDesign:PackIcon
-                Kind="QuestionMark"
-                Width="30"
-                Height="25"
-                Margin="-16 -4 -16 0"
-                />
+                    Kind="QuestionMark" Width="30" Height="25" Margin="-16 -4 -16 0"/>
             </Button>
             <TextBox 
-               x:Name="Answer_TextBox" Grid.Row="2" Grid.Column="1" Foreground="White" TextWrapping="WrapWithOverflow"  HorizontalAlignment="Stretch"
-               MinWidth="50" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"  VerticalAlignment="Stretch" 
-               FontSize="25"></TextBox>
+               x:Name="Answer" Grid.Row="2" Grid.Column="1" Foreground="White" TextWrapping="WrapWithOverflow"  
+               MinWidth="50" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"   
+               FontSize="25">
+            </TextBox>
             <TextBox 
-               x:Name="Expresion_TextBox" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Foreground="White"  TextWrapping="Wrap"  HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Hidden"  
-               MinWidth="100" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Text="56+56" VerticalAlignment="Stretch" 
-               FontSize="20" Margin="0 0 50 0"></TextBox>
+               x:Name="Expresion" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2"  Foreground="White"  TextWrapping="Wrap"   VerticalScrollBarVisibility="Hidden"  
+               MinWidth="100" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Text="56+56"  
+               FontSize="20" Margin="0 0 50 0">
+            </TextBox>
             <Button 
-                x:Name="Back_Button" Grid.Column="1" HorizontalAlignment="Right"  Grid.Row="1" Width="Auto" Height="Auto" HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center" Click="Remove_Button_Click"
+                x:Name="Back" Grid.Column="1" HorizontalAlignment="Right"  Grid.Row="1" Width="Auto" Height="Auto" 
+                VerticalContentAlignment="Center" Click="RemoveButtonClick"
                 Style="{StaticResource MaterialDesignFlatButton}">
                 <materialDesign:PackIcon
-                Kind="BackspaceOutline"
-                Width="40"
-                Margin="-10 0 -10 0"
-                Height="40"
-                />
+                    Kind="BackspaceOutline" Width="40" Margin="-10 0 -10 0" Height="40"/>
             </Button>
             <Grid Grid.Row="4" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" MinWidth="10"/>
-                    <ColumnDefinition Width="1*" MinWidth="10"/>
-                    <ColumnDefinition Width="1*" MinWidth="10"/>
-                    <ColumnDefinition Width="1*" MinWidth="10"/>
-                    <ColumnDefinition Width="1*" MinWidth="10"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Button 
-                    x:Name="N_0_Button" Grid.Column="1"  Grid.Row="4" Width="Auto" Height="Auto"
-                    Content="0" Margin="5" FontSize="30" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                    x:Name="Number0" Grid.Column="1"  Grid.Row="4" Content="0" Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button
-                    x:Name="N_1_Button" Grid.Column="0" Grid.Row="3" Width="Auto" Height="Auto"
-                    Content="1" Margin="5" FontSize="30" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                    x:Name="Number1" Grid.Column="0" Grid.Row="3" Content="1"   Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button 
-                    x:Name="N_2_Button" Grid.Column="1" Grid.Row="3" Width="Auto" Height="Auto"
-                    Content="2" Margin="5" FontSize="30" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                    x:Name="Number2" Grid.Column="1" Grid.Row="3" Content="2"   Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button 
-                    x:Name="N_3_Button" Grid.Column="2" Grid.Row="3" Width="Auto" Height="Auto"
-                    Content="3" Margin="5" FontSize="30" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                    x:Name="Number3" Grid.Column="2" Grid.Row="3" Content="3"   Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button 
-                    x:Name="N_4_Button" Grid.Column="0" Grid.Row="2" Width="Auto" Height="Auto"
-                    Content="4" Margin="5" FontSize="30" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                    x:Name="Number4" Grid.Column="0" Grid.Row="2" Content="4"   Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button 
-                    x:Name="N_5_Button" Grid.Column="1" Grid.Row="2" Width="Auto" Height="Auto"
-                    Content="5" Margin="5" FontSize="30" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                    x:Name="Number5" Grid.Column="1" Grid.Row="2" Content="5"   Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button 
-                    x:Name="N_6_Button" Grid.Column="2" Grid.Row="2" Width="Auto" Height="Auto"
-                    Content="6" Margin="5" FontSize="30" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                    x:Name="Number6" Grid.Column="2" Grid.Row="2" Content="6"   Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button 
-                    x:Name="N_7_Button" Grid.Column="0" Grid.Row="1" Width="Auto" Height="Auto"
-                    Content="7" Margin="5" FontSize="30" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                    x:Name="Number7" Grid.Column="0" Grid.Row="1" Content="7"   Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button 
-                    x:Name="N_8_Button" Grid.Column="1" Grid.Row="1" Width="Auto" Height="Auto"
-                    Content="8" Margin="5" FontSize="30" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                    x:Name="Number8" Grid.Column="1" Grid.Row="1" Content="8"   Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button 
-                    x:Name="N_9_Button" Grid.Column="2" Grid.Row="1" Width="Auto" Height="Auto"
-                    Content="9" Margin="5" FontSize="30" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedLightButton}">
+                    x:Name="Number9" Grid.Column="2" Grid.Row="1" Content="9"   Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
 
                 <Button 
-                    x:Name="Dot_Button" Grid.Column="0" Grid.Row="4" Width="Auto" Height="Auto"
-                    Content="." Margin="5" FontSize="30" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedAccentButton}">
+                    x:Name="Dot" Grid.Column="0" Grid.Row="4" Content="."   Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button 
-                    x:Name="Right_Bracket_Button" Grid.Column="2" Grid.Row="0" Width="Auto" Margin="5" 
-                    Content=")" FontSize="30" Height="Auto" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                    x:Name="RightBracket" Grid.Column="2" Grid.Row="0" Content=")"  Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button 
-                    x:Name="Left_Bracket_Button" Grid.Column="1" Grid.Row="0" Width="Auto" Margin="5"
-                    Content="(" FontSize="30" Height="Auto" Click="N_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                    x:Name="LeftBracket" Grid.Column="1" Grid.Row="0" Content="("  Click="NumberButtonClick"
+                    Style="{StaticResource LightButtonStyle}">
                 </Button>
 
                 <Button 
-                    x:Name="Delete_Button" Grid.Column="0" Grid.Row="0" Width="Auto" Height="Auto"
-                    Content="C" Margin="5" FontSize="30" Click="Delete_Button_Click"
-                    Style="{StaticResource MaterialDesignRaisedAccentButton}">
+                    x:Name="Delete" Grid.Column="0" Grid.Row="0" Content="C"   Click="DeleteButtonClick"
+                    Style="{StaticResource AccentButtonStyle}">
                 </Button>
 
                 <Button 
-                    x:Name="Equal_Button" Grid.Column="2" Grid.Row="4" Width="Auto" Margin="5"
-                    Style="{StaticResource MaterialDesignRaisedAccentButton}" Height="Auto" Click="Equal_Button_Click">
+                    x:Name="Equal" Grid.Column="2" Grid.Row="4"  Click="EqualButtonClick"
+                    Style="{StaticResource AccentButtonStyle}">
                     <materialDesign:PackIcon
-                    Kind="Equal"
-                    Width="40"
-                    Margin="-10 0 -10 0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" 
-                    Height="40"
-                    />
+                        Kind="Equal" Width="40" Margin="-10 0 -10 0" Height="40"/>
                 </Button>
 
                 <Button 
-                    x:Name="Modulo_Button" Grid.Column="4" Grid.Row="2" Width="Auto" Margin="5"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="Auto" Click="Modulo_Button_Click">
-                    <materialDesign:PackIcon
-                    Kind="Percent"
-                    Width="40"
-                    Margin="-10 0 -10 0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" 
-                    Height="40"
-                    />
+                    x:Name="Modulo" Grid.Column="4" Grid.Row="2"  Click="ModuloButtonClick"
+                    Style="{StaticResource DarkButtonStyle}"  >
+                    <TextBlock  Margin="-10 0 -10 0">
+		            <Run BaselineAlignment="Superscript" FontSize="26" FontWeight="Normal" >mod</Run>
+                    </TextBlock>
                 </Button>
                 <Button 
-                    x:Name="Factorial_Button" Grid.Column="4" Grid.Row="1" Width="Auto" Margin="5"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="Auto" Click="Factorial_Button_Click">
+                    x:Name="Factorial" Grid.Column="4" Grid.Row="1"  Click="FactorialButtonClick"
+                    Style="{StaticResource DarkButtonStyle}"  >
                     <materialDesign:PackIcon
-                    Kind="Exclamation"
-                    Width="40"
-                    Margin="-10 0 -10 0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Height="40"
-                    />
+                        Kind="Exclamation" Width="40" Margin="-10 0 -10 0" Height="40"/>
                 </Button>
                 <Button 
-                    x:Name="Euler_Button" Grid.Column="4" Grid.Row="0" Width="Auto" Margin="5"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="Auto" Click="Euler_Button_Click">
+                    x:Name="Euler" Grid.Column="4" Grid.Row="0" Click="EulerButtonClick"
+                    Style="{StaticResource DarkButtonStyle}"  >
                     <TextBlock  Margin="-10 0 -10 0">
 				    <Run BaselineAlignment="Superscript" FontSize="30" FontWeight="Regular" FontStyle="Italic">e</Run>
                     </TextBlock>
                 </Button>
                 <Button 
-                    x:Name="Power_Button" Grid.Column="4" Grid.Row="3" Width="Auto" Margin="5" FontSize="31"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="Auto" Click="Power_Button_Click">
+                    x:Name="Power" Grid.Column="4" Grid.Row="3"   FontSize="31" Click="PowerButtonClick"
+                    Style="{StaticResource DarkButtonStyle}"  >
                     <TextBlock  Margin="-10 0 -10 0">
 				    x<Run BaselineAlignment="Superscript" FontSize="20" FontStyle="Italic">n</Run>
                     </TextBlock>
                 </Button>
                 <Button 
-                    x:Name="Root_Button" Grid.Column="4" Grid.Row="4" Width="Auto" Margin="5" FontSize="31"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="Auto" Click="Root_Button_Click">
+                    x:Name="Root" Grid.Column="4" Grid.Row="4"   FontSize="31" Click="RootButtonClick"
+                    Style="{StaticResource DarkButtonStyle}"  >
                     <TextBlock  Margin="-10 0 -10 0">
 				    <Run BaselineAlignment="Superscript" FontSize="20" FontStyle="Italic">n</Run>√x
                     </TextBlock>
                 </Button>
                 <Button 
-                    x:Name="Pi_Button" Grid.Column="3" Grid.Row="0" Width="Auto" Margin="5"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="Auto" Click="Pi_Button_Click">
+                    x:Name="Pi" Grid.Column="3" Grid.Row="0"  Click="PiButtonClick"
+                    Style="{StaticResource DarkButtonStyle}"  >
                     <TextBlock  Margin="-10 0 -10 0">
 		            <Run BaselineAlignment="Superscript" FontSize="30" FontWeight="Regular" FontStyle="Italic">π</Run>
                     </TextBlock>
                 </Button>
                 <Button 
-                    x:Name="Divide_Button" Grid.Column="3" Grid.Row="1" Width="Auto" Margin="5"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="Auto" Click="Divide_Button_Click">
+                    x:Name="Divide" Grid.Column="3" Grid.Row="1"  Click="DivideButtonClick"
+                    Style="{StaticResource DarkButtonStyle}"  >
                     <materialDesign:PackIcon
-                    Kind="Divide"
-                    Width="40"
-                    Margin="-10 0 -10 0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" 
-                    Height="40"
-                    />
+                        Kind="Divide" Width="40" Margin="-10 0 -10 0" Height="40"/>
                 </Button>
                 <Button 
-                    x:Name="Multiply_Button" Grid.Column="3" Grid.Row="2" Width="Auto" Margin="5"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="Auto" Click="Multiply_Button_Click">
+                    x:Name="Multiply" Grid.Column="3" Grid.Row="2"  Click="MultiplyButtonClick"
+                    Style="{StaticResource DarkButtonStyle}"  >
                     <materialDesign:PackIcon
-                    Kind="Multiply"
-                    Width="40"
-                    Margin="-10 0 -10 0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" 
-                    Height="40"
-                    />
+                        Kind="Multiply" Width="40" Margin="-10 0 -10 0" Height="40"/>
                 </Button>
                 <Button 
-                    x:Name="Plus_Button" Grid.Column="3" Grid.Row="4" Width="Auto" Margin="5"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="Auto" Click="Plus_Button_Click">
+                    x:Name="Plus" Grid.Column="3" Grid.Row="4"  Click="PlusButtonClick"
+                    Style="{StaticResource DarkButtonStyle}"  >
                     <materialDesign:PackIcon
-                    Kind="Plus"
-                    Width="40"
-                    Margin="-10 0 -10 0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" 
-                    Height="40"
-                    />
+                        Kind="Plus" Width="40" Margin="-10 0 -10 0" Height="40"/>
                 </Button>
                 <Button 
-                    x:Name="Minus_Button" Grid.Column="3" Grid.Row="3" Width="Auto" Margin="5"
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" Height="Auto" Click="Minus_Button_Click">
+                    x:Name="Minus" Grid.Column="3" Grid.Row="3"  Click="MinusButtonClick"
+                    Style="{StaticResource DarkButtonStyle}"  >
                     <materialDesign:PackIcon
-                    Kind="Minus"
-                    Width="40"
-                    Margin="-10 0 -10 0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch" 
-                    Height="40"
-                    />
+                        Kind="Minus" Width="40" Margin="-10 0 -10 0" Height="40"/>
                 </Button>
             </Grid>
         </Grid>
-    </Border>
 </Window>

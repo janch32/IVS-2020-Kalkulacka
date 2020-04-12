@@ -1,20 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using MathLib;
-using MathLib.Expression;
-using MathLib.Exceptions;
 
 
 namespace Calculator
@@ -24,195 +10,194 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private IMathLibrary Library { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            Library = MathLibraryFactory.Build();
         }
         /// <summary>
-        ///     MOuse drag move.
+        ///     Mouse drags move.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">MouseButtonEventArgs.</param>
-        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        private void WindowMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+                DragMove();
         }
         /// <summary>
-        ///     Closes window.
+        ///     Closes the window.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">ExecutedRoutedEventArgs.</param>
         private void CloseCommandHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
         /// <summary>
-        ///     Minimalizes window.
+        ///     Minimizes window.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">RoutedEventArgs.</param>
-        private void Window_Minimalize(object sender, RoutedEventArgs e)
+        private void WindowMinimalize(object sender, RoutedEventArgs e)
         {
-            MyWindow.WindowState = WindowState.Minimized;
+            WindowState = WindowState.Minimized;
+        }
+        
+        /// <summary>
+        ///     Adds a number of buttons to expresion.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void NumberButtonClick(object sender, RoutedEventArgs e)
+        {
+            Expresion.Text += ((Button)sender).Content.ToString();
         }
         /// <summary>
-		///     Adds number of button to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void N_Button_Click(object sender, RoutedEventArgs e)
+        ///     Deletes expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void DeleteButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += ((Button)sender).Content.ToString();
+            Expresion.Text = "";
         }
         /// <summary>
-		///     Deletes expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Delete_Button_Click(object sender, RoutedEventArgs e)
+        ///     Deletes last char from expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text = "";
-        }
-        /// <summary>
-		///     deletes last char from expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Remove_Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (Expresion_TextBox.Text.Length > 1)
+            if (Expresion.Text.Length > 1)
             {
-                Expresion_TextBox.Text = Expresion_TextBox.Text.Remove(Expresion_TextBox.Text.Length - 1);
+                Expresion.Text = Expresion.Text.Remove(Expresion.Text.Length - 1);
             }
             else
             {
-                Expresion_TextBox.Text = "";
+                Expresion.Text = "";
             }
         }
         /// <summary>
-		///     Adds pi to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Pi_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds pi to expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void PiButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += "π";
+            Expresion.Text += "π";
         }
         /// <summary>
-		///     Adds euler number to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Euler_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds euler number to expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void EulerButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += "e";
+            Expresion.Text += "e";
         }
         /// <summary>
-		///     Calls math library with expresion and prints result.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Equal_Button_Click(object sender, RoutedEventArgs e)
+        ///     Calls math library with expression and prints result.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void EqualButtonClick(object sender, RoutedEventArgs e)
         {
-            var parser = new MathLib.Expression.Parser(Expresion_TextBox.Text);
+            var parser = new MathLib.Expression.Parser(Expresion.Text);
             decimal v = parser.Evaluate();
-            Answer_TextBox.Text = v.ToString();
+            Answer.Text = v.ToString();
             //Answer_TextBox_Row.Height = new GridLength(0.6, GridUnitType.Star);
-            Grid.SetRowSpan(Expresion_TextBox,1);
+            Grid.SetRowSpan(Expresion,1);
         }
         /// <summary>
-		///     Adds plus to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Plus_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds plus to expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void PlusButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += "+";
+            Expresion.Text += "+";
         }
         /// <summary>
-		///     Adds minus to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Minus_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds minus to expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void MinusButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += "-";
+            Expresion.Text += "-";
         }
         /// <summary>
-		///     Adds multiply to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Multiply_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds multiply to expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void MultiplyButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += "*";
+            Expresion.Text += "*";
         }
         /// <summary>
-		///     Adds divide to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Divide_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds divide to expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void DivideButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += "/";
+            Expresion.Text += "/";
         }
         /// <summary>
-		///     Adds left bracket to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Left_Bracket_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds left bracket to expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void LeftBracketButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += "(";
+            Expresion.Text += "(";
         }
         /// <summary>
-		///     Adds right bracket to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Right_Bracket_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds right bracket to expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void RightBracketButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += ")";
+            Expresion.Text += ")";
         }
         /// <summary>
-		///     Adds exclamation mark to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Factorial_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds exclamation mark to the expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void FactorialButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += "!";
+            Expresion.Text += "!";
         }
         /// <summary>
-		///     Adds % to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Modulo_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds % to expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void ModuloButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += "%";
+            Expresion.Text += "%";
         }
         /// <summary>
-		///     Adds √ to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Root_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds √ to expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void RootButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += "√";
+            Expresion.Text += "√";
         }
         /// <summary>
-		///     Adds ^ to expresion.
-		/// </summary>
-		/// <param name="sender">Sender object.</param>
-		/// <param name="e">RoutedEventArgs.</param>
-		private void Power_Button_Click(object sender, RoutedEventArgs e)
+        ///     Adds ^ to expression.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void PowerButtonClick(object sender, RoutedEventArgs e)
         {
-            Expresion_TextBox.Text += "^";
+            Expresion.Text += "^";
         }
     }
 }
