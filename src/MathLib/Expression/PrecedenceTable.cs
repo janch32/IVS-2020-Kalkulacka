@@ -8,13 +8,11 @@
     /// ||-------||-------+-------+-------+-------+-------+-------+-------||
     /// || * / % ||   >   |   >   |   <   |   <   |   <   |   >   |   >   ||
     /// ||-------||-------+-------+-------+-------+-------+-------+-------||
-    /// ||   !   ||   >   |   >   |   >   |   >   |       |   >   |   >   ||
-    /// ||-------||-------+-------+-------+-------+-------+-------+-------||
     /// || ^root ||   >   |   >   |   <   |   >   |   <   |   >   |   >   ||
     /// ||-------||-------+-------+-------+-------+-------+-------+-------||
     /// ||   (   ||   <   |   <   |   <   |   <   |   <   |   =   |       ||
     /// ||-------||-------+-------+-------+-------+-------+-------+-------||
-    /// || ) val ||   >   |   >   |   >   |   >   |       |   >   |   >   ||
+    /// ||! ) val||   >   |   >   |   >   |   >   |       |   >   |   >   ||
     /// ||-------||-------+-------+-------+-------+-------+-------+-------||
     /// ||   $   ||   <   |   <   |   <   |   <   |   <   |       |       ||
     /// ++=======++=======================================================++
@@ -65,20 +63,6 @@
             return Precedence.Right;
         }
 
-        private Precedence FactorialPrecedence(TokenType curr)
-        {
-            switch (curr)
-            {
-                case TokenType.LeftBracket:
-                case TokenType.Number:
-                case TokenType.Pi:
-                case TokenType.Euler:
-                    return Precedence.None;
-            }
-
-            return Precedence.Left;
-        }
-
         private Precedence PowRootPrecedence(TokenType curr)
         {
             switch (curr)
@@ -101,8 +85,7 @@
             return Precedence.Right;
         }
 
-        // TODO: From warning: Update this method so that its implementation is not identical to 'FactorialPrecedence'.
-        private Precedence ValRBracketPrecedence(TokenType curr)
+        private Precedence FactValRBracketPrecedence(TokenType curr)
         {
             switch (curr)
             {
@@ -138,15 +121,14 @@
                 case TokenType.Power:
                 case TokenType.Root:
                     return PowRootPrecedence(curr);
-                case TokenType.Factorial:
-                    return FactorialPrecedence(curr);
                 case TokenType.LeftBracket:
                     return LeftBracketPrecedence(curr);
+                case TokenType.Factorial:
                 case TokenType.RightBracket:
                 case TokenType.Number:
                 case TokenType.Pi:
                 case TokenType.Euler:
-                    return ValRBracketPrecedence(curr);
+                    return FactValRBracketPrecedence(curr);
             }
 
             return Precedence.None;
