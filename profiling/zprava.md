@@ -11,8 +11,16 @@ Mezi matematickými funkcemi byly nejčastěji volané metody pro sčítání, n
 ### Možné optimalizace
 - Zpracování výrazů pomocí regulárních výrazů.
 
-## Přílohy
+## Výstupy z profilovací aplikace
 
-- vystup.10.png - Profilace matematické knihovny o deseti hodnotách.
-- vystup.100.png - Profilace matematické knihovny o sto hodnotách.
-- vystup.1000.png - Profilace matematické knihovny o tisíc hodnotách.
+### Profilace matematické knihovny o deseti hodnotách.
+![vystup.10.png](vystup.10.png)
+<div style="page-break-after: always;"></div>
+
+### Profilace matematické knihovny o sto hodnotách.
+![vystup.100.png](vystup.100.png)
+<div style="page-break-after: always;"></div>
+
+### Profilace matematické knihovny o tisíc hodnotách.
+![vystup.1000.png](vystup.1000.png)
+<div style="page-break-after: always;"></div>
