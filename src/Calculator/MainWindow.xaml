@@ -35,6 +35,7 @@
                 <RowDefinition Height="0.2*"/>
             </Grid.RowDefinitions>
 
+            
             <Button 
                 x:Name="Close_Window_Button" Grid.Column="1"  Grid.Row="0" Width="35" Height="35" HorizontalAlignment="Right"
                 Foreground="White" Margin="0 0 -10 0" Opacity="0.6" Command="ApplicationCommands.Close"
@@ -54,6 +55,17 @@
                 Kind="WindowMinimize"
                 Width="30"
                 Height="30"
+                Margin="-16 -4 -16 0"
+                />
+            </Button>
+            <Button 
+                 Grid.Column="1"  Grid.Row="0" Width="35" Height="35" HorizontalAlignment="Right"
+                Foreground="White" Margin="0 2 50 0" Opacity="0.6" Command="ApplicationCommands.Close"
+                Style="{StaticResource MaterialDesignFlatAccentButton}">
+                <materialDesign:PackIcon
+                Kind="QuestionMark"
+                Width="30"
+                Height="25"
                 Margin="-16 -4 -16 0"
                 />
             </Button>
