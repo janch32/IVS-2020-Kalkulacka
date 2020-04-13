@@ -10,6 +10,7 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -23,13 +24,6 @@ namespace Calculator
         {
             if (e.ChangedButton == MouseButton.Left)
                 DragMove();
-        }
-        private void OnButtonKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
-            {
-                Expression.Text += (int)e.Key - (int)Key.NumPad0; ;
-            }
         }
         /// <summary>
         ///     Closes the window.
@@ -51,13 +45,13 @@ namespace Calculator
         }
         
         /// <summary>
-        ///     Adds a number of buttons to Expression.
+        ///     Adds a number of buttons to expresion.
         /// </summary>
         /// <param name="sender">Sender object.</param>
         /// <param name="e">RoutedEventArgs.</param>
         private void NumberButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += ((Button)sender).Content.ToString();
+            Expresion.Text += ((Button)sender).Content.ToString();
         }
         /// <summary>
         ///     Deletes expression.
@@ -66,7 +60,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void DeleteButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text = "";
+            Expresion.Text = "";
         }
         /// <summary>
         ///     Deletes last char from expression.
@@ -75,13 +69,13 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
-            if (Expression.Text.Length > 1)
+            if (Expresion.Text.Length > 1)
             {
-                Expression.Text = Expression.Text.Remove(Expression.Text.Length - 1);
+                Expresion.Text = Expresion.Text.Remove(Expresion.Text.Length - 1);
             }
             else
             {
-                Expression.Text = "";
+                Expresion.Text = "";
             }
         }
         /// <summary>
@@ -91,7 +85,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void PiButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "π";
+            Expresion.Text += "π";
         }
         /// <summary>
         ///     Adds euler number to expression.
@@ -100,7 +94,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void EulerButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "e";
+            Expresion.Text += "e";
         }
         /// <summary>
         ///     Calls math library with expression and prints result.
@@ -109,11 +103,11 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void EqualButtonClick(object sender, RoutedEventArgs e)
         {
-            var parser = new MathLib.Expression.Parser(Expression.Text);
+            var parser = new MathLib.Expression.Parser(Expresion.Text);
             decimal v = parser.Evaluate();
             Answer.Text = v.ToString();
             //Answer_TextBox_Row.Height = new GridLength(0.6, GridUnitType.Star);
-            Grid.SetRowSpan(Expression,1);
+            Grid.SetRowSpan(Expresion,1);
         }
         /// <summary>
         ///     Adds plus to expression.
@@ -122,7 +116,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void PlusButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "+";
+            Expresion.Text += "+";
         }
         /// <summary>
         ///     Adds minus to expression.
@@ -131,7 +125,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void MinusButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "-";
+            Expresion.Text += "-";
         }
         /// <summary>
         ///     Adds multiply to expression.
@@ -140,7 +134,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void MultiplyButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "*";
+            Expresion.Text += "*";
         }
         /// <summary>
         ///     Adds divide to expression.
@@ -149,7 +143,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void DivideButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "/";
+            Expresion.Text += "/";
         }
         /// <summary>
         ///     Adds left bracket to expression.
@@ -158,7 +152,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void LeftBracketButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "(";
+            Expresion.Text += "(";
         }
         /// <summary>
         ///     Adds right bracket to expression.
@@ -167,7 +161,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void RightBracketButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += ")";
+            Expresion.Text += ")";
         }
         /// <summary>
         ///     Adds exclamation mark to the expression.
@@ -176,7 +170,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void FactorialButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "!";
+            Expresion.Text += "!";
         }
         /// <summary>
         ///     Adds % to expression.
@@ -185,7 +179,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void ModuloButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "%";
+            Expresion.Text += "%";
         }
         /// <summary>
         ///     Adds √ to expression.
@@ -194,7 +188,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void RootButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "√";
+            Expresion.Text += "√";
         }
         /// <summary>
         ///     Adds ^ to expression.
@@ -203,7 +197,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void PowerButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "^";
+            Expresion.Text += "^";
         }
     }
 }
