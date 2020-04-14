@@ -11,7 +11,7 @@ namespace MathLib.Expression
     {
         #region Regex rules for individual tokens
         private readonly Regex Add = new Regex(@"^\+");
-        private readonly Regex Subtract = new Regex(@"^-");
+        private readonly Regex Subtract = new Regex(@"^(-|−)");
         private readonly Regex Multiply = new Regex(@"^(\*|×|⋅)");
         private readonly Regex Divide = new Regex(@"^(\/|÷)");
         private readonly Regex Power = new Regex(@"^(pow|\^)", RegexOptions.IgnoreCase);
@@ -20,9 +20,9 @@ namespace MathLib.Expression
         private readonly Regex Factorial = new Regex(@"^!");
         private readonly Regex LeftBracket = new Regex(@"^\(");
         private readonly Regex RightBracket = new Regex(@"^\)");
-        private readonly Regex Number = new Regex(@"^([1-9]\d*|0)((\.|,)\d+)?");
-        private readonly Regex Pi = new Regex(@"^(pi|π)", RegexOptions.IgnoreCase);
-        private readonly Regex Euler = new Regex(@"^(e|euler)", RegexOptions.IgnoreCase);
+        private readonly Regex Number = new Regex(@"^\d+((\.|,)\d+)?");
+        private readonly Regex Pi = new Regex(@"^(pi|π|𝜋)", RegexOptions.IgnoreCase);
+        private readonly Regex Euler = new Regex(@"^(e|euler|ℇ)", RegexOptions.IgnoreCase);
         #endregion
 
         /// <summary>

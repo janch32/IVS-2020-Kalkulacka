@@ -195,12 +195,13 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void EqualButtonClick(object sender, RoutedEventArgs e)
         {
+            Grid.SetRowSpan(Expression, 1);
+
             try
             {
                 var parser = new MathLib.Expression.Parser(Expression.Text);
                 decimal result = parser.Evaluate();
                 Answer.Text = result.ToString();
-                Grid.SetRowSpan(Expression, 1);
             }
             catch (DivideByZeroException)
             {
@@ -248,7 +249,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void MultiplyButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "*";
+            Expression.Text += "×";
         }
 
         /// <summary>
@@ -258,7 +259,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void DivideButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "/";
+            Expression.Text += "÷";
         }
 
         /// <summary>
@@ -298,7 +299,7 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void ModuloButtonClick(object sender, RoutedEventArgs e)
         {
-            Expression.Text += "%";
+            Expression.Text += "mod";
         }
 
         /// <summary>

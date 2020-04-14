@@ -218,7 +218,7 @@
                     x:Name="Divide" Grid.Column="3" Grid.Row="1"  Click="DivideButtonClick"
                     Style="{StaticResource DarkButtonStyle}"  >
                     <materialDesign:PackIcon
-                        Kind="Divide" Width="40" Margin="-10 0 -10 0" Height="40"/>
+                        Kind="Division" Width="40" Margin="-10 0 -10 0" Height="40"/>
                 </Button>
                 <Button 
                     x:Name="Multiply" Grid.Column="3" Grid.Row="2"  Click="MultiplyButtonClick"
