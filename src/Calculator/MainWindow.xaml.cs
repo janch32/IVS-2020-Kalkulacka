@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -24,11 +25,74 @@ namespace Calculator
             if (e.ChangedButton == MouseButton.Left)
                 DragMove();
         }
+
+        /// <summary>
+        /// Handle button input.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">KeyEventArgs.</param>
         private void OnButtonKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+            switch (e.Key)
             {
-                Expression.Text += (int)e.Key - (int)Key.NumPad0; ;
+                case Key.NumPad0:
+                    Expression.Text += "0";
+                    break;
+                case Key.NumPad1:
+                    Expression.Text += "1";
+                    break;
+                case Key.NumPad2:
+                    Expression.Text += "2";
+                    break;
+                case Key.NumPad3:
+                    Expression.Text += "3";
+                    break;
+                case Key.NumPad4:
+                    Expression.Text += "4";
+                    break;
+                case Key.NumPad5:
+                    Expression.Text += "5";
+                    break;
+                case Key.NumPad6:
+                    Expression.Text += "6";
+                    break;
+                case Key.NumPad7:
+                    Expression.Text += "7";
+                    break;
+                case Key.NumPad8:
+                    Expression.Text += "8";
+                    break;
+                case Key.NumPad9:
+                    Expression.Text += "9";
+                    break;
+                case Key.Decimal:
+                case Key.OemPeriod:
+                case Key.OemComma:
+                    Expression.Text += ",";
+                    break;
+                case Key.Add:
+                    PlusButtonClick(null, null);
+                    break;
+                case Key.Subtract:
+                    MinusButtonClick(null, null);
+                    break;
+                case Key.Multiply:
+                    MultiplyButtonClick(null, null);
+                    break;
+                case Key.Divide:
+                    DivideButtonClick(null, null);
+                    break;
+                case Key.Back:
+                    RemoveButtonClick(null, null);
+                    break;
+                case Key.Return:
+                case Key.OemPlus:
+                    EqualButtonClick(null, null);
+                    break;
+                case Key.Escape:
+                case Key.Delete:
+                    DeleteButtonClick(null, null);
+                    break;
             }
         }
 
@@ -116,12 +180,23 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void EqualButtonClick(object sender, RoutedEventArgs e)
         {
-            var parser = new MathLib.Expression.Parser(Expression.Text);
-            decimal v = parser.Evaluate();
-            Answer.Text = v.ToString();
-            //Answer_TextBox_Row.Height = new GridLength(0.6, GridUnitType.Star);
-            Grid.SetRowSpan(Expression, 1);
+            try
+            {
+                var parser = new MathLib.Expression.Parser(Expression.Text);
+                decimal result = parser.Evaluate();
+                Answer.Text = result.ToString();
+                Grid.SetRowSpan(Expression, 1);
+            }
+            catch (MathLib.Exceptions.ParseException)
+            {
+                Answer.Text = "Syntax Error";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Chyba aplikace: " + ex.Message);
+            }
         }
+
 
         /// <summary>
         /// Adds plus to expression.

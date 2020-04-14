@@ -149,7 +149,7 @@
                 </Button>
 
                 <Button 
-                    x:Name="Dot" Grid.Column="0" Grid.Row="4" Content="."   Click="NumberButtonClick"
+                    x:Name="Dot" Grid.Column="0" Grid.Row="4" Content=","   Click="NumberButtonClick"
                     Style="{StaticResource LightButtonStyle}">
                 </Button>
                 <Button 
