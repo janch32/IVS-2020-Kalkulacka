@@ -93,6 +93,9 @@ namespace Calculator
                 case Key.Delete:
                     DeleteButtonClick(null, null);
                     break;
+                case Key.F1:
+                   ShowHint(null, null);
+                    break;
             }
         }
 
@@ -117,6 +120,16 @@ namespace Calculator
         }
 
         /// <summary>
+        /// Shows Help.
+        /// </summary>
+        /// <param name="sender">Sender object.</param>
+        /// <param name="e">RoutedEventArgs.</param>
+        private void ShowHint(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Nevis? blby no.");
+        }
+
+        /// <summary>
         /// Adds a number of buttons to Expression.
         /// </summary>
         /// <param name="sender">Sender object.</param>
@@ -134,6 +147,8 @@ namespace Calculator
         private void DeleteButtonClick(object sender, RoutedEventArgs e)
         {
             Expression.Text = "";
+            Answer.Text = "";
+            Grid.SetRowSpan(Expression, 2);
         }
 
         /// <summary>
@@ -187,10 +202,18 @@ namespace Calculator
                 Answer.Text = result.ToString();
                 Grid.SetRowSpan(Expression, 1);
             }
+            catch (DivideByZeroException)
+            {
+                Answer.Text = "Divide by zero";
+            }
+            catch (ArithmeticException)
+            {
+                Answer.Text = "Arithmetic error";
+            }
             catch (MathLib.Exceptions.ParseException)
             {
                 Answer.Text = "Syntax Error";
-            }
+            }            
             catch (Exception ex)
             {
                 MessageBox.Show("Chyba aplikace: " + ex.Message);
