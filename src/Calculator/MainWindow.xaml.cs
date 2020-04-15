@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MathLib.Exceptions;
 using MathLib.Expression;
 
 namespace Calculator
@@ -286,7 +287,7 @@ namespace Calculator
             {
                 Answer.Text = "Arithmetic error";
             }
-            catch (MathLib.Exceptions.ParseException)
+            catch (ParseException)
             {
                 Answer.Text = "Syntax Error";
             }            
