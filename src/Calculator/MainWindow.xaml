@@ -23,17 +23,20 @@
             <Setter Property = "Width" Value = "Auto"/>
             <Setter Property = "FontSize" Value = "30"/>
             <Setter Property = "Margin" Value = "5"/>
+            <Setter Property = "Focusable" Value = "False"/>
         </Style>
         <Style x:Key="AccentButtonStyle" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}" TargetType = "Button">
             <Setter Property = "Height" Value = "Auto"/>
             <Setter Property = "Width" Value = "Auto"/>
             <Setter Property = "FontSize" Value = "30"/>
             <Setter Property = "Margin" Value = "5"/>
+            <Setter Property = "Focusable" Value = "False"/>
         </Style>
         <Style x:Key="DarkButtonStyle" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}" TargetType = "Button">
             <Setter Property = "Height" Value = "Auto"/>
             <Setter Property = "Width" Value = "Auto"/>
             <Setter Property = "Margin" Value = "5"/>
+            <Setter Property = "Focusable" Value = "False"/>
         </Style>
     </Window.Resources>
     
@@ -56,21 +59,21 @@
             
             <Button 
                 x:Name="CloseWindow" Grid.Column="1"  Grid.Row="0" Width="35" Height="35" HorizontalAlignment="Right"
-                Foreground="White" Margin="0 0 -10 0" Opacity="0.6" Command="ApplicationCommands.Close"
+                Foreground="White" Margin="0 0 -10 0" Opacity="0.6" Command="ApplicationCommands.Close" Focusable="False"
                 Style="{StaticResource MaterialDesignFlatAccentButton}">
                 <materialDesign:PackIcon
                     Kind="WindowClose" Width="35" Height="35" Margin="-16 -4 -16 0"/>
             </Button>
             <Button 
                 x:Name="MinimalizeWindow" Grid.Column="1"  Grid.Row="0" Width="30" Height="30" HorizontalAlignment="Right"
-                Foreground="White" Margin="0 10 25 0" Opacity="0.6" Click="WindowMinimalize"
+                Foreground="White" Margin="0 10 25 0" Opacity="0.6" Click="WindowMinimalize" Focusable="False"
                 Style="{StaticResource MaterialDesignFlatAccentButton}">
                 <materialDesign:PackIcon
                     Kind="WindowMinimize" Width="30" Height="30" Margin="-16 -4 -16 0"/>
             </Button>
             <Button 
                  Grid.Column="1"  Grid.Row="0" Width="35" Height="35" HorizontalAlignment="Right"
-                Foreground="White" Margin="0 2 50 0" Opacity="0.6" Click="ShowHint"
+                Foreground="White" Margin="0 2 50 0" Opacity="0.6" Click="ShowHint" Focusable="False"
                 Style="{StaticResource MaterialDesignFlatAccentButton}">
                 <materialDesign:PackIcon
                     Kind="QuestionMark" Width="30" Height="25" Margin="-16 -4 -16 0"/>
@@ -87,7 +90,7 @@
             </TextBox>
             <Button 
                 x:Name="Back" Grid.Column="1" HorizontalAlignment="Right"  Grid.Row="1" Width="Auto" Height="Auto" 
-                VerticalContentAlignment="Center" Click="RemoveButtonClick"
+                VerticalContentAlignment="Center" Click="RemoveButtonClick" Focusable="False"
                 Style="{StaticResource MaterialDesignFlatButton}">
                 <materialDesign:PackIcon
                     Kind="BackspaceOutline" Width="40" Margin="-10 0 -10 0" Height="40"/>

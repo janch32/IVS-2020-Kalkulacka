@@ -15,7 +15,9 @@ namespace Calculator
         /// Match terms that shouldn't have space between them
         /// </summary>
         private readonly Regex FormatterNoSpace = new Regex(@"([\d,\.\(\)!\^√]{2}|(?<![^\+\-×÷d]\s)-(\(|\d|e|π))$");
-        
+        private readonly Regex IsNumber = new Regex(@"^(\d|e|π)$");
+        private readonly Regex IsSign = new Regex(@"^(,|\+|\-|×|÷|!|\^|√|\(|\))$");
+
         public MainWindow()
         {
             InitializeComponent();
@@ -136,11 +138,31 @@ namespace Calculator
         }
 
         /// <summary>
-        /// Appends term to the end of expression
+        /// Checks if answer Text is non-empty and based on input term uses answer for Expression. Clears answer.
+        /// </summary>
+        /// <param name="term">Any mathematical terminal</param>
+        private void CheckAnsver(string term)
+        {
+            if (Answer.Text != "" && IsSign.IsMatch(term))
+            {
+                Expression.Text = Answer.Text;
+                Answer.Text = "";
+            }
+            if (Answer.Text != "" && IsNumber.IsMatch(term))
+            {
+                Expression.Text = "";
+                Answer.Text = "";
+            }
+        }
+        
+        /// <summary>
+        /// Appends term to the end of expression.
         /// </summary>
         /// <param name="term">Any mathematical terminal</param>
         private void AppendExpression(string term)
         {
+            CheckAnsver(term);
+
             if (Expression.Text.Length > 0 && !FormatterNoSpace.IsMatch(Expression.Text + term))
             {
                 Expression.Text += " ";
