@@ -26,7 +26,7 @@ namespace MathLib.Expression
             SyntaxChecker.VerifySyntax(tokens);
 
             Input = new List<Token>(tokens);
-            
+
             // Insert "stop" tokens to the beginning of parser stack and the end
             // of input tokens list. This is used to signal end of evaluating.
             Input.Add(new Token(TokenType.None, "", -1));

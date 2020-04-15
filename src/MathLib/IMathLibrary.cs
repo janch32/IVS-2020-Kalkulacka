@@ -1,5 +1,4 @@
 ﻿using System;
-using MathLib.Exceptions;
 
 namespace MathLib
 {
@@ -51,10 +50,10 @@ namespace MathLib
         /// <summary>
         /// Calculate factorial
         /// </summary>
-        /// <param name="n">Decimal number greater then or equal to zero</param>
+        /// <param name="x">Decimal number greater then or equal to zero</param>
         /// <exception cref="ArithmeticException">Throws when the provided number is negative</exception>
         /// <returns>Factorial result</returns>
-        decimal Factorial(decimal n);
+        decimal Factorial(decimal x);
 
         /// <summary>
         /// Calculate exponentiation of base <paramref name="a"/> to the power of <paramref name="n"/>

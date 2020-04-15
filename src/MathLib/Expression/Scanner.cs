@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+// Useless warnings
+#pragma warning disable S1121, RCS1192
+
 namespace MathLib.Expression
 {
     /// <summary>
@@ -91,14 +94,18 @@ namespace MathLib.Expression
             if (num.Type != TokenType.Number &&
                 num.Type != TokenType.Pi &&
                 num.Type != TokenType.Euler)
+            {
                 return;
+            }
 
             var curr = tokens[^2];
             if (curr.Type != TokenType.Add &&
                 curr.Type != TokenType.Subtract)
+            {
                 return;
+            }
 
-            if(tokens.Count > 2)
+            if (tokens.Count > 2)
             {
                 var prev = tokens[^3];
                 if (prev.Type == TokenType.Factorial ||
@@ -106,7 +113,9 @@ namespace MathLib.Expression
                     prev.Type == TokenType.Number ||
                     prev.Type == TokenType.Pi ||
                     prev.Type == TokenType.Euler)
+                {
                     return;
+                }
             }
 
             curr.Type = num.Type;

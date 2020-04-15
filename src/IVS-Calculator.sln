@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathLib", "MathLib\MathLib.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathLibTests", "MathLibTests\MathLibTests.csproj", "{125B3676-2D7D-4DB1-8F9C-983C9C34AFCF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MathLibProfiler", "MathLibProfiler\MathLibProfiler.csproj", "{268D030B-EBA8-4F21-9B07-4EA81F40DAE6}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{00DB740C-4AC0-4502-9334-D72D58F975A4}"
 EndProject
 Global
@@ -27,6 +29,10 @@ Global
 		{00DB740C-4AC0-4502-9334-D72D58F975A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00DB740C-4AC0-4502-9334-D72D58F975A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00DB740C-4AC0-4502-9334-D72D58F975A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{268D030B-EBA8-4F21-9B07-4EA81F40DAE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{268D030B-EBA8-4F21-9B07-4EA81F40DAE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{268D030B-EBA8-4F21-9B07-4EA81F40DAE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{268D030B-EBA8-4F21-9B07-4EA81F40DAE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
