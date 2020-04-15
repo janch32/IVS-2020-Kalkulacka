@@ -15,9 +15,9 @@ namespace Calculator
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// Match terms that shouldn't have space between them.
+        /// Match terms that should not have space between them.
         /// </summary>
-        private readonly Regex FormatterNoSpace = new Regex(@"([\d,\.\(\)!\^√]{2}|(?<![^\+\-×÷d]\s)-(\(|\d|e|π))$");
+        private readonly Regex FormatterNoSpace = new Regex(@"([\^√][-\+]|[\d,\.\(\)!\^√]{2}|(?<![^\+\-×÷d]\s)-(\(|\d|e|π))$");
         
         /// <summary>
         /// Match number, Euler's number or Ludoplh's number.
