@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,11 +13,19 @@ namespace Calculator
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// Match terms that shouldn't have space between them
+        /// Match terms that shouldn't have space between them.
         /// </summary>
         private readonly Regex FormatterNoSpace = new Regex(@"([\d,\.\(\)!\^√]{2}|(?<![^\+\-×÷d]\s)-(\(|\d|e|π))$");
-        private readonly Regex IsNumber = new Regex(@"^(\d|e|π)$");
-        private readonly Regex IsSign = new Regex(@"^(,|\+|\-|×|÷|!|\^|√|\(|\))$");
+        
+        /// <summary>
+        /// Match number, Euler's number or Ludoplh's number.
+        /// </summary>
+        private readonly Regex MatchNumber = new Regex(@"^(\d|e|π)$");
+        
+        /// <summary>
+        /// Match mathematical signs as multiply, divide, etc..
+        /// </summary>
+        private readonly Regex MatchSign = new Regex(@"^(,|\+|\-|×|÷|!|\^|√|\(|\))$");
 
         public MainWindow()
         {
@@ -101,6 +110,12 @@ namespace Calculator
                 case Key.Delete:
                     DeleteButtonClick(null, null);
                     break;
+                case Key.D9:
+                    LeftBracketButtonClick(null, null);
+                    break;
+                case Key.D0:
+                    RightBracketButtonClick(null, null);
+                    break;
                 case Key.F1:
                    ShowHint(null, null);
                     break;
@@ -138,17 +153,31 @@ namespace Calculator
         }
 
         /// <summary>
-        /// Checks if answer Text is non-empty and based on input term uses answer for Expression. Clears answer.
+        /// Checks if string is a number.
+        /// </summary>
+        /// <param name="s">Checked string</param>
+        bool IsNumeric(string s)
+        {
+            foreach (char c in s)
+            {
+                if (!Char.IsDigit(c))
+                    return false;
+            }
+            return s.Any();
+        }
+
+        /// <summary>
+        /// Checks if answer Text is Number and based on input term, uses answer for Expression. Clears answer.
         /// </summary>
         /// <param name="term">Any mathematical terminal</param>
         private void CheckAnsver(string term)
         {
-            if (Answer.Text != "" && IsSign.IsMatch(term))
+            if (IsNumeric(Answer.Text) && MatchSign.IsMatch(term))
             {
                 Expression.Text = Answer.Text;
                 Answer.Text = "";
             }
-            if (Answer.Text != "" && IsNumber.IsMatch(term))
+            if (IsNumeric(Answer.Text) && MatchNumber.IsMatch(term))
             {
                 Expression.Text = "";
                 Answer.Text = "";
