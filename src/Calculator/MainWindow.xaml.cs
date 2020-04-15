@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using MathLib.Expression;
 
 namespace Calculator
 {
@@ -150,17 +151,18 @@ namespace Calculator
         private void ShowHint(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Nevis? blby no.");
+            // TODO: doplnit funkcnost
         }
 
         /// <summary>
         /// Checks if string is a number.
         /// </summary>
         /// <param name="s">Checked string</param>
-        bool IsNumeric(string s)
+        private bool IsNumeric(string s)
         {
             foreach (char c in s)
             {
-                if (!Char.IsDigit(c))
+                if (!char.IsDigit(c))
                     return false;
             }
             return s.Any();
@@ -170,7 +172,7 @@ namespace Calculator
         /// Checks if answer Text is Number and based on input term, uses answer for Expression. Clears answer.
         /// </summary>
         /// <param name="term">Any mathematical terminal</param>
-        private void CheckAnsver(string term)
+        private void CheckAnswer(string term)
         {
             if (IsNumeric(Answer.Text) && MatchSign.IsMatch(term))
             {
@@ -190,7 +192,7 @@ namespace Calculator
         /// <param name="term">Any mathematical terminal</param>
         private void AppendExpression(string term)
         {
-            CheckAnsver(term);
+            CheckAnswer(term);
 
             if (Expression.Text.Length > 0 && !FormatterNoSpace.IsMatch(Expression.Text + term))
             {
@@ -272,7 +274,7 @@ namespace Calculator
 
             try
             {
-                var parser = new MathLib.Expression.Parser(Expression.Text);
+                var parser = new Parser(Expression.Text);
                 decimal result = parser.Evaluate();
                 Answer.Text = result.ToString();
             }
