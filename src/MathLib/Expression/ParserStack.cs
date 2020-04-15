@@ -151,6 +151,7 @@ namespace MathLib.Expression
                 {
                     case TokenType.Root:
                         // Root without second operand is square root
+                        if (op.Value.Contains("-")) return -Math.Root(val[0], 2);
                         return Math.Root(val[0], 2);
                     case TokenType.Factorial:
                         return Math.Factorial(val[0]);

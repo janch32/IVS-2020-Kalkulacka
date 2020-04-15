@@ -93,7 +93,8 @@ namespace MathLib.Expression
             var num = tokens[^1];
             if (num.Type != TokenType.Number &&
                 num.Type != TokenType.Pi &&
-                num.Type != TokenType.Euler)
+                num.Type != TokenType.Euler &&
+                num.Type != TokenType.Root)
             {
                 return;
             }
