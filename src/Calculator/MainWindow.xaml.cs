@@ -178,14 +178,16 @@ namespace Calculator
         /// <param name="e">RoutedEventArgs.</param>
         private void RemoveButtonClick(object sender, RoutedEventArgs e)
         {
-            if (Expression.Text.Length > 1)
+            if (Expression.Text.EndsWith("mod"))
+            {
+                Expression.Text = Expression.Text.Remove(Expression.Text.Length - 3, 3);
+            }
+            else if (Expression.Text.Length > 0)
             {
                 Expression.Text = Expression.Text.Remove(Expression.Text.Length - 1);
             }
-            else
-            {
-                Expression.Text = "";
-            }
+
+            Expression.Text = Expression.Text.TrimEnd();
         }
 
         /// <summary>
