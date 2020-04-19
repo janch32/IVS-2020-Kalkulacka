@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -150,9 +153,22 @@ namespace Calculator
         /// <param name="sender">Sender object.</param>
         /// <param name="e">RoutedEventArgs.</param>
         private void ShowHint(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Nevis? blby no.");
-            // TODO: doplnit funkcnost
+        {           
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            string calculator = "Calculator_" + version.ToString();
+            string path = Path.Combine(Path.GetTempPath(), calculator);
+            Directory.CreateDirectory(path);
+
+            path = Path.Combine(path, @"help.pdf");
+            byte[] PDF = Properties.Resources.help;
+            MemoryStream ms = new MemoryStream(PDF);
+            FileStream f = new FileStream(path, FileMode.OpenOrCreate);
+
+            ms.WriteTo(f);
+            f.Close();
+            ms.Close();
+
+            Process.Start("cmd.exe",$"/c \"{path}");
         }
 
         /// <summary>
