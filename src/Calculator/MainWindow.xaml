@@ -14,7 +14,7 @@
     Background="Transparent"
     WindowStyle="None"
     FontFamily="{DynamicResource MaterialDesignFont}"
-    Title="Kalkulačka"
+    Title="Calculator"
     Height="500" MinHeight="450" Width="400" MinWidth="350">
 
     <Window.CommandBindings>
