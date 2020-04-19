@@ -161,12 +161,9 @@ namespace Calculator
 
             path = Path.Combine(path, @"help.pdf");
             byte[] PDF = Properties.Resources.help;
-            MemoryStream ms = new MemoryStream(PDF);
-            FileStream f = new FileStream(path, FileMode.OpenOrCreate);
-
+            using MemoryStream ms = new MemoryStream(PDF);
+            using FileStream f = new FileStream(path, FileMode.OpenOrCreate);
             ms.WriteTo(f);
-            f.Close();
-            ms.Close();
 
             Process.Start("cmd.exe",$"/c \"{path}");
         }
