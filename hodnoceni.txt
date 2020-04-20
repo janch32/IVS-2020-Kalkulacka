@@ -1,4 +1,4 @@
-xchalo16 100 (TODO)
-xhalab00 100 (TODO)
-xvacla26 100 (TODO)
-xhrmor00 100 (TODO)
+xchalo16 100 (knihovna, zpracování výrazů, kontrola a dohled nad projektem)
+xhalab00 100 (testy knihovny, profiling, doxygen dokumentace, kontrola stylu kódu)
+xvacla26 100 (UI, napojení na knihovnu, mockup, uživatelská dokumentace)
+xhrmor00 100 (nápověda v aplikaci, makefile, instalátor, readme)
