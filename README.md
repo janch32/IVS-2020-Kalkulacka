@@ -45,4 +45,4 @@ Now you are able to run aplication from makefile. To build and run it simply typ
 Windows 64bit
 
 ## License
-MIT licence, see file [LICENSE](/LICENSE) at the root of the repository.
+GNU GPL v3 license, see file [LICENSE](/LICENSE) at the root of the repository.
