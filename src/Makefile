@@ -1,11 +1,12 @@
-#						#
-# Team: IVS and chill				#
-#						#
-# Members:	Jan Chaloupka			#
-#	   	Michal Halabica			#
-#	   	Marek Václavík			#
-#	   	Richard Hrmo			#
-#						#
+#							#
+# Team: IVS and chill		#
+#							#
+# Members:					#
+#		Jan Chaloupka		#
+#	   	Michal Halabica		#
+#	   	Marek Václavík		#
+#	   	Richard Hrmo		#
+#							#
 
 
 CWD=$(shell cd)
