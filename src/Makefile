@@ -16,12 +16,8 @@ PROJECT_LIBRARY=MathLib
 PROJECT_PROFILER=MathLibProfiler
 PROJECT=$(PROJECT_NAME)\bin\Release\netcoreapp3.1\$(PROJECT_NAME)
 
-TEST=$(PROJECT_TEST)\bin\Release\netcoreapp3.1\$(PROJECT_TEST)
-
 PROFILER=$(PROJECT_PROFILER)\bin\Release\netcoreapp3.1\$(PROJECT_PROFILER)
-PROFILER_DATA1=..\profiling\Data\input_10
-PROFILER_DATA2=..\profiling\Data\input_100
-PROFILER_DATA3=..\profiling\Data\input_1000
+PROFILER_DATA=..\profiling\Data\input_1000
 
 DOC=$(CWD)\..\dokumentace
 
@@ -37,9 +33,7 @@ PACK_REPO=$(PACK_DIR)\repo
 all: run
 	
 build:
-	dotnet build --configuration Release $(PROJECT_NAME)
-	dotnet build --configuration Release $(PROJECT_TEST)
-	dotnet build --configuration Release $(PROJECT_PROFILER)
+	dotnet build -c Release
 
 pack:
 	if exist "$(PACK_DIR)" del /f /s /q "$(PACK_DIR)"  1>nul & rmdir /s /q "$(PACK_DIR)" 
@@ -75,12 +69,11 @@ clean:
 	if exist "$(PROJECT_PROFILER)\obj" rmdir /q /s  $(PROJECT_PROFILER)\obj
 	if exist "$(PROJECT_PROFILER)\$(PROJECT_PROFILER).csproj.user" del $(PROJECT_PROFILER)\$(PROJECT_PROFILER).csproj.user
 	
-	if exist "TestsResult" rmdir /q /s TestsResult
+	if exist "TestResult" rmdir /q /s TestResult
 	if exist "IVS-Calculator.sln.DotSettings.user" del IVS-Calculator.sln.DotSettings.user
 
 test:
-	IF NOT EXIST "$(TEST).dll" make build
-	dotnet test $(TEST).dll
+	dotnet test
 	rmdir /q /s TestResults
 
 run:
@@ -89,16 +82,15 @@ run:
 
 profile:
 	if not exist "$(PROFILER).dll" make build
-	dotnet $(PROFILER).dll < $(PROFILER_DATA1).txt
-	dotnet $(PROFILER).dll < $(PROFILER_DATA2).txt
-	dotnet $(PROFILER).dll < $(PROFILER_DATA3).txt
-help:
+	dotnet $(PROFILER).dll < $(PROFILER_DATA).txt
 	
-	$(info all: default parameter, runs the aplication)
-	$(info build: builds the aplication)
-	$(info pack: packs the program into zip file)
-	$(info clean: deletes all unnecessery files and folders)
-	$(info test: runs tests for Math Library)
-	$(info run: runs the aplication)
-	$(info profile: runs profiling)
-	$(info help: prints out help)
+help:
+	@echo To be able to build the project you need ".NET Core 3.1" utility. For more information see "README.md".
+	@echo all: default parameter, runs the aplication
+	@echo build: builds the aplication
+	@echo pack: packs the program into zip file
+	@echo clean: deletes all unnecessery files and folders
+	@echo test: runs tests for Math Library
+	@echo run: runs the aplication
+	@echo profile: runs profiling
+	@echo help: prints out help
