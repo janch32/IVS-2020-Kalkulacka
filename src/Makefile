@@ -83,7 +83,7 @@ run:
 profile:
 	if not exist "$(PROFILER).dll" make build
 	dotnet $(PROFILER).dll < $(PROFILER_DATA).txt
-	
+
 help:
 	@echo To be able to build the project you need ".NET Core 3.1" utility. For more information see "README.md".
 	@echo all: default parameter, runs the aplication
