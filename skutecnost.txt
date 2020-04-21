@@ -1,1 +1,5 @@
-TODO Tento soubor bude obsahovat rozdíl mezi plánem projektu a skutečností
+Projekt se dle našich představ podařilo splnit ve stanoveného termínu.
+
+Jediné nedodržení termínu bylo při finalizaci programu kalkulačka. Místo daného
+termínu 12.4. byl program dokončen 15.4. Toto ale nemělo na celkový průběh žádný
+dopad.
