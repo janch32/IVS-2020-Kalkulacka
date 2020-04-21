@@ -74,7 +74,7 @@ clean:
 
 test:
 	dotnet test
-	rmdir /q /s TestResults
+	if exist "TestResults" rmdir /q /s TestResults
 
 run:
 	IF NOT EXIST "$(PROJECT).exe" make build
